@@ -155,6 +155,29 @@ input[type=checkbox] { accent-color: var(--green); width: 1.05rem; height: 1.05r
 .message small { display: flex; align-items: center; flex-wrap: wrap; gap: .4rem; color: var(--muted); }
 .message small span { display: inline-flex; align-items: center; gap: .2rem; }
 .typing { font-size: .85rem; }
+
+.agenda-grid { display: grid; grid-template-columns: minmax(255px,.85fr) minmax(0,1.45fr); gap: 1rem; align-items: start; }
+.agenda-side,.agenda-list,.calendar,.appointment { display: grid; gap: .9rem; min-width: 0; }
+.calendar h2,.appointment h2 { font-size: 1.15rem; }
+.calendar h2 { text-transform: capitalize; }
+.calendar-days { display: grid; grid-template-columns: repeat(7,1fr); gap: .2rem; text-align: center; }
+.calendar-days > span { font-size: .75rem; color: var(--muted); }
+.calendar-days button { position: relative; padding: .2rem; min-height: 38px; background: white; color: var(--text); }
+.calendar-days button[aria-current],.calendar-days button:hover { border-color: var(--green); }
+.calendar-days button[aria-pressed=true] { background: var(--light); color: var(--green); }
+.calendar-days i { position: absolute; bottom: 3px; height: 4px; width: 4px; border-radius: 50%; background: var(--green-2); }
+.appointment p { display: flex; align-items: center; gap: .5rem; overflow-wrap: anywhere; }
+.appointment p svg { flex-shrink: 0; }
+.schedule-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .7rem; }
+.status-pendente { background: var(--warning-bg); color: #714b15; }
+.status-cancelado { background: var(--disabled); color: var(--muted); }
+.agenda-notice { display: flex; justify-content: space-between; align-items: center; gap: .6rem; padding: .4rem .7rem; border-radius: 10px; background: var(--light); }
+@media (max-width: 900px) {
+  .agenda-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 470px) {
+  .schedule-fields { grid-template-columns: 1fr; }
+}
 @media (max-width: 700px) {
   .chat-grid { grid-template-columns: 1fr; }
   .conversation-list { max-height: 220px; overflow: auto; }

@@ -1,5 +1,7 @@
 # Estado da implementação
 
+- Agenda · TESTADO na API. Datas, participação, conflito concorrente, contraproposta e evento Socket.IO cobertos.
+
 - Chat · TESTADO na API e Socket.IO. Interface compilada. Persistência, deduplicação, acesso, presença e recibos cobertos.
 
 | Área | Status | Código, dados e verificação |

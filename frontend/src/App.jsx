@@ -7,6 +7,7 @@ import { Profile } from './pages/Profile.jsx';
 import { Layout } from './Layout.jsx';
 import { PublicProfile, Suggestions } from './pages/Suggestions.jsx';
 import { Chat } from './pages/Chat.jsx';
+import { Agenda } from './pages/Agenda.jsx';
 import { LiveProvider } from './realtime.jsx';
 
 export default function App() {
@@ -46,6 +47,7 @@ export default function App() {
       <Route path="/perfil" element={<Profile user={user} update={setUser} />} />
       <Route path="/pessoas/:id" element={<PublicProfile />} />
       <Route path="/conversas/:id?" element={<Chat user={user} />} />
+      <Route path="/agenda" element={<Agenda user={user} />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Route>
   </Routes></LiveProvider>;

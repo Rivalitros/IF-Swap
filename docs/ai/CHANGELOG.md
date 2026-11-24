@@ -2,6 +2,8 @@
 
 ## 2026-11-24
 
+- Agenda recíproca e calendário. Quatro testes integrados, dois unitários e build aprovados. Chat 795f70c enviado a origin/main.
+
 - Chat local por Socket.IO. Três testes integrados, dois unitários e build aprovados. Revisão acadêmica 3b25dc2 enviada a origin/main.
 
 - Análise visual e acadêmica dos sete originais. Registro das diferenças, regras de agenda e avaliação e revisão de privacidade dos materiais.

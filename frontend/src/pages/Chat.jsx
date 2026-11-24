@@ -117,8 +117,9 @@ function Thread({ matchId, peer, userId }) {
   }
 
   return <section className="card thread">
-    <header className="person thread-head">
-      <Avatar person={peer} /><div><h2>{peer.name}</h2><p>{online ? 'Online' : 'Offline'}</p></div>
+    <header className="section-heading thread-head">
+      <div className="person"><Avatar person={peer} /><div><h2>{peer.name}</h2><p>{online ? 'Online' : 'Offline'}</p></div></div>
+      <Link className="button secondary" to={`/agenda?match=${matchId}`}>Agendar</Link>
     </header>
     {!connected && <p className="feedback warning" role="status">Conexão em tempo real indisponível. Seu rascunho foi mantido enquanto esta conversa estiver aberta.</p>}
     <Feedback error={error || history.error || send.error} />

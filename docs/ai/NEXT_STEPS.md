@@ -1,5 +1,7 @@
 # Próximos passos
 
+- [ ] IF-07 · Alta · Entregar avaliação mútua e mural com respostas encadeadas.
+
 - [ ] IF-06 · Alta · Implementar agenda recíproca e notificações de transição.
 
 - [x] IF-04 · Alta · Identificar e revisar os sete originais. Renderizar as páginas Figma e registrar divergências.

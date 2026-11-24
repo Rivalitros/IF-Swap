@@ -1,5 +1,13 @@
 # Handoff
 
+## Agenda recíproca e calendário
+
+As regras de interesse mútuo, janela de tempo e conflitos estão em `backend/src/repositories/agenda.js`; o calendário em `frontend/src/pages/Agenda.jsx`.
+
+Verificação: Quatro testes integrados, dois unitários e build aprovados. Chat 795f70c enviado a origin/main.
+
+Próximo passo: IF-07 · Alta · Entregar avaliação mútua e mural com respostas encadeadas.
+
 ## Chat local por Socket.IO
 
 O React usa `frontend/src/pages/Chat.jsx` e `frontend/src/realtime.jsx`. A API e o contrato estão em `backend/src/realtime.js` e `docs/api.md`.

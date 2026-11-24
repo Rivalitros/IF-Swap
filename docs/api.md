@@ -46,3 +46,13 @@ Socket.IO usa o cookie da sessão na mesma origem. Eventos de cliente usam ackno
 | chat:typing | `{ matchId, active }`. Requer entrada na sala. |
 
 O servidor emite `chat:message` com o objeto persistido, `chat:receipt` com `{ matchId, messages }`, `chat:presence` com `{ userId, online }` e `chat:typing` com `{ matchId, userId, active }`. São três estados de mensagem. **Enviada** significa commit no banco. **Recebida** significa confirmação de uma sessão do destinatário. **Lida** significa carregada em uma conversa aberta e com a aba visível. Após reconectar, o cliente recarrega o histórico PostgreSQL e novas páginas podem ser consultadas; o Socket.IO sozinho não garante recuperação de eventos perdidos.
+
+## Agenda
+
+| Método e caminho | Entrada e retorno |
+|---|---|
+| GET /agenda | Encontros da sessão com par, horário, estado e indicador de avaliação. |
+| POST /agenda | `{ matchId, startsAt, endsAt, location, modality }`. Retorna proposta em estado pendente, 201. Instantes ISO 8601 com offset. Modalidade `presencial` ou `online`. |
+| PATCH /agenda/:id | `{ action }`, com `accept`, `decline`, `cancel`, `start` ou `complete`. Para `change`, acrescente o novo intervalo, local, modalidade e `reason` opcional. |
+
+As propostas e aceitações exigem interesse mútuo. Só o outro participante responde à proposta ou apresenta contraproposta. O aceite reserva o intervalo nos dois calendários. Hora final exclusiva permite encontros contíguos. Um encontro confirmado ou em andamento é concluído pelo relógio do servidor após o fim. O evento `agenda:update` entrega `{ id, matchId, status }` aos participantes após persistência. A agenda recupera estados após reconexão.

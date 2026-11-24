@@ -1,14 +1,17 @@
-import { NavLink, Outlet, useNavigate, useSearchParams } from 'react-router-dom';
-import { Compass, LogOut, MessageSquare, Search, UserRound } from 'lucide-react';
+import { Link, NavLink, Outlet, useNavigate, useSearchParams } from 'react-router-dom';
+import { CalendarDays, Compass, LogOut, MessageSquare, Search, UserRound, X } from 'lucide-react';
 import { Avatar, Brand, Feedback } from './components.jsx';
+import { useLive } from './realtime.jsx';
 
 const navigation = [
   ['/', 'Sugestões', Compass],
   ['/conversas', 'Conversas', MessageSquare],
+  ['/agenda', 'Agenda', CalendarDays],
   ['/perfil', 'Perfil', UserRound],
 ];
 
 export function Layout({ user, onLogout, error }) {
+  const { scheduleEvent, dismissSchedule } = useLive();
   const navigate = useNavigate();
   const [search] = useSearchParams();
   const query = search.get('q') || '';
@@ -33,7 +36,14 @@ export function Layout({ user, onLogout, error }) {
         </form>
         <button className="secondary logout" onClick={onLogout}><LogOut size={17} /><span>Sair</span></button>
       </header>
-      <main className="workspace"><Feedback error={error} /><Outlet /></main>
+      <main className="workspace"><Feedback error={error} />
+        {scheduleEvent && <div className="agenda-notice" role="status">
+          <Link to="/agenda" onClick={dismissSchedule}>{scheduleEvent.status === 'concluido'
+            ? 'Encontro concluído. Avalie a sua troca na agenda.' : 'Seu agendamento foi atualizado. Ver agenda.'}</Link>
+          <button className="icon-button" onClick={dismissSchedule} aria-label="Dispensar aviso"><X size={16} /></button>
+        </div>}
+        <Outlet />
+      </main>
     </div>
   </div>;
 }

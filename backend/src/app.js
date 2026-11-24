@@ -7,6 +7,8 @@ import { accountRoutes } from './routes/accounts.js';
 import { profileRoutes } from './routes/profile.js';
 import { matchingRoutes } from './routes/matching.js';
 import { chatRoutes } from './routes/chat.js';
+import { agendaRoutes, announce } from './routes/agenda.js';
+import { completeEnded } from './repositories/agenda.js';
 import { realtime } from './realtime.js';
 import { requireSession } from './services/sessions.js';
 import { uploads } from './services/profile.js';
@@ -22,6 +24,21 @@ export function createApplication(db) {
   });
   ready().catch(() => {});
   const live = realtime(server, db, ready);
+  let checking = false;
+  const clock = setInterval(async () => {
+    if (checking) return;
+    checking = true;
+    try {
+      await ready();
+      for (const appointment of await completeEnded(db)) announce(live, appointment);
+    } catch (error) {
+      if (publicError(error).status === 503) return;
+    } finally {
+      checking = false;
+    }
+  }, 30_000);
+  clock.unref();
+  server.once('close', () => clearInterval(clock));
 
   app.disable('x-powered-by');
   app.use('/api', (req, res, next) => {
@@ -44,6 +61,7 @@ export function createApplication(db) {
   app.use('/api/profile', profileRoutes(db));
   app.use('/api', matchingRoutes(db));
   app.use('/api', chatRoutes(db));
+  app.use('/api/agenda', agendaRoutes(db, live));
   app.use('/api/photos', express.static(fileURLToPath(uploads), { index: false, redirect: false }));
   app.use('/api', (req, res) => res.status(404).json({ error: 'Recurso não encontrado.' }));
   app.use((error, req, res, next) => {
