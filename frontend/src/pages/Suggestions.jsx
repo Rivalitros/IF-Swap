@@ -1,30 +1,31 @@
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { BookOpen, MessageCircle, Sparkles, UsersRound } from 'lucide-react';
+import { BookOpen, UsersRound } from 'lucide-react';
 import { api } from '../api.js';
 import { affiliations, Avatar, dateTime, Feedback, Rating, useAction, useResource } from '../components.jsx';
 
-function Tags({ values, empty }) {
-  return values.length ? <div className="tags">{values.map(value => <span key={value} className="tag">{value}</span>)}</div> :
+function Tags({ values, empty, outlined }) {
+  return values.length ? <div className="tags">{values.map(value => <span key={value} className={`tag ${outlined ? 'outlined' : ''}`}>{value}</span>)}</div> :
     <p className="muted">{empty}</p>;
 }
 
 function Suggestion({ person }) {
   const action = useAction();
   const navigate = useNavigate();
+  const otherInterests = person.learn.filter(value => !person.can_teach.includes(value));
   return <article className="card suggestion">
     <div className="person"><Avatar person={person} /><div><h2>{person.name}</h2><p>{person.department}</p></div></div>
     <Rating person={person} />
-    <span className={`compatibility ${person.reciprocal ? 'reciprocal' : ''}`}><Sparkles size={14} />{person.reciprocal ? 'Troca recíproca' : 'Troca em um sentido'}</span>
-    {person.can_learn.length > 0 && <section><h3>Você pode aprender</h3><Tags values={person.can_learn} /></section>}
-    {person.can_teach.length > 0 && <section><h3>Você pode ensinar</h3><Tags values={person.can_teach} /></section>}
-    <section><h3>Quer aprender</h3><Tags values={person.learn} empty="Nenhuma habilidade informada." /></section>
+    {!person.reciprocal && <span className="compatibility">Troca em um sentido</span>}
+    {person.can_learn.length > 0 && <section><h3>Ensina o que você quer aprender</h3><Tags values={person.can_learn} /></section>}
+    {person.can_teach.length > 0 && <section><h3>Quer aprender o que você ensina</h3><Tags values={person.can_teach} outlined /></section>}
+    {otherInterests.length > 0 && <details className="other-interests"><summary>Outros interesses de aprendizado</summary><Tags values={otherInterests} outlined /></details>}
     <Feedback error={action.error} />
     <footer className="actions">
-      <Link to={`/pessoas/${person.id}`} className="button secondary">Ver perfil</Link>
+      <Link to={`/pessoas/${person.id}`} className="button profile-link">Ver perfil</Link>
       <button className="primary" disabled={action.busy} onClick={() => action.run(async () => {
         const match = await api('/matches', { method: 'POST', body: { userId: person.id } });
         navigate(`/conversas/${match.id}`);
-      })}><MessageCircle size={16} /> Iniciar conversa</button>
+      })}>Iniciar conversa</button>
     </footer>
   </article>;
 }
@@ -34,7 +35,7 @@ export function Suggestions() {
   const q = search.get('q') || '';
   const result = useResource(`/suggestions?q=${encodeURIComponent(q)}`);
   return <>
-    <header className="page-heading"><h1>Sugestões para você</h1><p>Conheça pessoas com habilidades que combinam com as suas.</p></header>
+    <header className="page-heading suggestions-heading"><h1>Sugestões para você</h1><p>Pessoas que ensinam o que você quer aprender e querem aprender o que você ensina.</p></header>
     <Feedback error={result.error} busy={result.busy} />
     {result.error && <button className="secondary" onClick={result.refresh}>Tentar novamente</button>}
     {result.data?.length === 0 && <div className="card empty"><UsersRound size={26} /><h2>{q ? 'Nenhum resultado' : 'Nenhuma sugestão por enquanto'}</h2>

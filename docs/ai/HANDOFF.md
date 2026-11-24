@@ -1,5 +1,13 @@
 # Handoff
 
+## Alinhamento visual e correção das habilidades de demonstração
+
+Login/cadastro, onboarding e sugestões ajustados em `frontend/src/`. A migração `002_normalize_demo_skills.sql` reconcilia chaves antigas.
+
+Verificação: Dois testes unitários, seis integrados, build e dupla sessão no navegador aprovados.
+
+Próximo passo: IF-09 · Alta · Consolidar documentação, testar indisponibilidade e recuperar o serviço, confirmar o remoto.
+
 ## Avaliações, reputação e mural
 
 Avaliação em `backend/src/routes/reviews.js`, mural em `backend/src/routes/challenges.js` e `frontend/src/pages/Challenges.jsx`. A API calcula média e posição do perfil.

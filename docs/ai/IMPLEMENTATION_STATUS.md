@@ -1,5 +1,7 @@
 # Estado da implementação
 
+- Interface Figma · TESTADO no Edge em 1440×900 e 390×844. Migração de compatibilidade do seed validada em PostgreSQL.
+
 - Avaliações e mural · TESTADO na API; feedback mútuo, prazo e respostas encadeadas. Interfaces compiladas.
 
 - Agenda · TESTADO na API. Datas, participação, conflito concorrente, contraproposta e evento Socket.IO cobertos.

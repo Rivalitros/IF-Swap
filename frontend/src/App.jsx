@@ -40,12 +40,12 @@ export default function App() {
   if (user.onboarding_step < 4) return <Profile user={user} update={setUser} onboarding />;
 
   return <LiveProvider key={user.id} userId={user.id} onExpired={clearUser}><Routes>
-    <Route element={<Layout user={user} error={error} onLogout={async () => {
-      try { await api('/auth/logout', { method: 'POST' }); setUser(null); }
-      catch (failure) { setError(failure.message); }
-    }} />}>
+    <Route element={<Layout user={user} error={error} />}>
       <Route index element={<Suggestions />} />
-      <Route path="/perfil" element={<Profile user={user} update={setUser} />} />
+      <Route path="/perfil" element={<Profile user={user} update={setUser} onLogout={async () => {
+        try { await api('/auth/logout', { method: 'POST' }); setError(''); setUser(null); }
+        catch (failure) { setError(failure.message); }
+      }} />} />
       <Route path="/pessoas/:id" element={<PublicProfile />} />
       <Route path="/conversas/:id?" element={<Chat user={user} />} />
       <Route path="/agenda" element={<Agenda user={user} />} />

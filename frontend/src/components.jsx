@@ -1,9 +1,9 @@
 import { useEffect, useId, useState } from 'react';
-import { ArrowLeftRight, Star } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { api } from './api.js';
 
 export function Brand() {
-  return <span className="brand"><span className="brand-mark"><ArrowLeftRight size={22} aria-hidden="true" /></span><span>IF<span className="brand-light">Swap</span></span></span>;
+  return <span className="brand"><span className="brand-mark" aria-hidden="true" /><span>IF Swap</span></span>;
 }
 
 export function Avatar({ person, size = '' }) {
@@ -67,7 +67,11 @@ export function AffiliationField({ value = 'aluno' }) {
 }
 
 export function Rating({ person }) {
-  return <span className="rating"><Star size={15} aria-hidden="true" />
-    {person.review_count ? `${Number(person.reputation).toLocaleString('pt-BR')} (${person.review_count} ${person.review_count === 1 ? 'avaliação' : 'avaliações'})` : 'Sem avaliações'}
+  const rating = Number(person.reputation);
+  return <span className="rating"><span className="stars" aria-hidden="true">
+    {[1, 2, 3, 4, 5].map(value => <Star size={16} strokeWidth={1} key={value} className={value <= Math.round(rating) ? 'filled' : ''} />)}
+  </span>
+    {person.review_count ? <><strong aria-label={`Nota ${rating} de 5`}>{rating.toLocaleString('pt-BR', { minimumFractionDigits: 1 })}</strong>
+      <span>({person.review_count} <span className="rating-word">{person.review_count === 1 ? 'avaliação' : 'avaliações'}</span>)</span></> : 'Sem avaliações'}
   </span>;
 }

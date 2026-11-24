@@ -1,6 +1,7 @@
 import { createPool, first, transaction } from '../src/db.js';
 import { migrate } from './migrate.js';
 import { hashPassword } from '../src/services/passwords.js';
+import { normalizeSkill } from '../src/services/profile.js';
 import { readFile } from 'node:fs/promises';
 
 const pool = createPool();
@@ -29,7 +30,7 @@ try {
       for (const [kind, skillName] of [['teach', teach], ['learn', learn]]) {
         const skill = await first(client, `INSERT INTO skills (name, normalized_name) VALUES ($1, $2)
           ON CONFLICT (normalized_name) DO UPDATE SET normalized_name = EXCLUDED.normalized_name RETURNING id`,
-        [skillName, skillName.toLowerCase()]);
+        [skillName, normalizeSkill(skillName)]);
         await client.query('INSERT INTO user_skills (user_id, skill_id, kind, slot) VALUES ($1, $2, $3, 1)',
           [user.id, skill.id, kind]);
       }

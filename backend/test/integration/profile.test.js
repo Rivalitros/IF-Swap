@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
+import { unlink } from 'node:fs/promises';
 import { account, fixture } from '../helpers.js';
+import { uploads } from '../../src/services/profile.js';
 
 test('cadastro, login, perfil e limite concorrente de habilidades', async t => {
   const { client, db } = await fixture(t);
@@ -21,6 +23,13 @@ test('cadastro, login, perfil e limite concorrente de habilidades', async t => {
   assert.equal((await browser.send('/auth/login', 'POST', data)).status, 200);
   const edit = await browser.send('/profile', 'PATCH', { ...data, department: 'Biblioteca', is_public: true });
   assert.equal(edit.body.department, 'Biblioteca');
+  const photo = new FormData();
+  const sample = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aA/QAAAAASUVORK5CYII=', 'base64');
+  photo.set('photo', new Blob([sample], { type: 'image/png' }), 'avatar.png');
+  const uploaded = await browser.send('/profile/photo', 'PUT', photo);
+  assert.equal(uploaded.status, 200);
+  t.after(() => unlink(new URL(uploaded.body.photo, uploads)));
+  assert.equal((await browser.send('/photos/' + uploaded.body.photo)).status, 200);
 
   const additions = await Promise.all(Array.from({ length: 6 }, (_, i) =>
     browser.send('/profile/skills', 'POST', { kind: 'teach', name: `Área ${i}` })));

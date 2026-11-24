@@ -13,6 +13,12 @@ Os sete arquivos de `README/` foram revistos antes da retomada. O DER e as 13 p�
 | Figma, páginas 7–9 e 11–13 | Barra de três segmentos, foto centralizada, chips preenchidos no ensino e contornados no aprendizado, controles abaixo do cartão no mobile | Onboarding funcional usa etapas numeradas, foto lateral e chips idênticos. |
 | Figma, navegação | Sugestões, Conversas, Agenda, Mural e Meu perfil | Menu parcial. As páginas internas de Conversas, Agenda e Mural não estão representadas no PDF. Usar a identidade dos componentes documentados. |
 
+## Adaptação e conferência
+
+O React foi ajustado para o cartão central de autenticação, as três barras de onboarding, a foto central, os chips de ensino e aprendizado, o menu interno em desktop e inferior no celular e os cartões de sugestões com cinco estrelas e as duas direções. O cadastro inclui o vínculo escolar requerido pelo prompt. Os exemplos são dados fictícios do PostgreSQL. Os estados de erro, vazio e carregamento, a busca e a indicação de troca unidirecional complementam o PDF.
+
+Em Edge, foram capturadas as telas de login, cadastro, etapas de configuração e sugestões em 1440×900 e 390×844. A conferência foi feita sobre a geometria dos componentes, navegação, ordem visual, estados e hierarquia. As páginas internas do chat, agenda e mural foram montadas com os mesmos componentes e tokens.
+
 ### Revisão para versionamento
 
 Os formulários, PDFs e protótipo contêm combinações de nomes, turma, contatos pessoais ou metadados de autoria. Seus originais ficam em `README/` no computador e são preservados integralmente. O TXT com o modelo relacional foi revisado e pode ser versionado. Em outro computador, obtenha os demais documentos pelo canal privado acadêmico e coloque-os em `README/`. A síntese nesta página permite continuar sem contatos pessoais ou reprodução dos protótipos em Git.

@@ -1,17 +1,17 @@
 import { Link, NavLink, Outlet, useNavigate, useSearchParams } from 'react-router-dom';
-import { CalendarDays, Compass, LayoutGrid, LogOut, MessageSquare, Search, UserRound, X } from 'lucide-react';
+import { CalendarDays, LayoutGrid, Link2, MessageSquare, Search, UserRound, X } from 'lucide-react';
 import { Avatar, Brand, Feedback } from './components.jsx';
 import { useLive } from './realtime.jsx';
 
 const navigation = [
-  ['/', 'Sugestões', Compass],
+  ['/', 'Sugestões', Link2],
   ['/conversas', 'Conversas', MessageSquare],
   ['/agenda', 'Agenda', CalendarDays],
-  ['/mural', 'Mural', LayoutGrid],
-  ['/perfil', 'Perfil', UserRound],
+  ['/mural', 'Mural de desafios', LayoutGrid, 'Mural'],
+  ['/perfil', 'Meu perfil', UserRound, 'Perfil'],
 ];
 
-export function Layout({ user, onLogout, error }) {
+export function Layout({ user, error }) {
   const { scheduleEvent, dismissSchedule } = useLive();
   const navigate = useNavigate();
   const [search] = useSearchParams();
@@ -19,10 +19,9 @@ export function Layout({ user, onLogout, error }) {
   return <div className="app-layout">
     <aside className="sidebar">
       <NavLink className="brand-link" to="/" aria-label="IF Swap, início"><Brand /></NavLink>
-      <nav aria-label="Navegação principal">{navigation.map(([path, label, Icon]) => <NavLink key={path} to={path} end={path === '/'}>
-        <Icon size={20} aria-hidden="true" /><span>{label}</span>
+      <nav aria-label="Navegação principal">{navigation.map(([path, label, Icon, compact]) => <NavLink key={path} to={path} end={path === '/'}>
+        <span className="nav-icon"><Icon size={19} aria-hidden="true" /></span><span className="nav-label">{label}</span><span className="nav-compact">{compact || label}</span>
       </NavLink>)}</nav>
-      <div className="sidebar-user"><Avatar person={user} /><div><strong>{user.name}</strong><small>{user.department}</small></div></div>
     </aside>
     <div className="app-column">
       <header className="topbar">
@@ -32,10 +31,10 @@ export function Layout({ user, onLogout, error }) {
           const value = new FormData(event.currentTarget).get('q').trim();
           navigate(value ? `/?q=${encodeURIComponent(value)}` : '/');
         }}>
-          <input type="search" name="q" defaultValue={query} maxLength={100} placeholder="Buscar pessoas ou habilidades" aria-label="Buscar pessoas ou habilidades" />
           <button className="icon-button" aria-label="Buscar"><Search size={20} /></button>
+          <input type="search" name="q" defaultValue={query} maxLength={100} placeholder="Buscar habilidades ou pessoas" aria-label="Buscar habilidades ou pessoas" />
         </form>
-        <button className="secondary logout" onClick={onLogout}><LogOut size={17} /><span>Sair</span></button>
+        <Link className="account-shortcut" to="/perfil" aria-label="Meu perfil"><Avatar person={user} /></Link>
       </header>
       <main className="workspace"><Feedback error={error} />
         {scheduleEvent && <div className="agenda-notice" role="status">

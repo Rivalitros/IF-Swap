@@ -16,3 +16,5 @@ A [migração inicial](../backend/database/migrations/001_initial.sql) é a font
 | Sessão técnica | sessions | Hash do token como PK, FK para usuário e expiração. |
 
 A reputação é calculada pela média das notas recebidas. As autorizações por participante, transições de estado e conflitos de intervalos pertencem à API. A comparação com os documentos originais permanece pendente.
+
+A [revisão acadêmica](revisao-academica.md) confirma o vínculo do agendamento com o match e a cardinalidade de zero a duas avaliações por encontro. A [migração 002](../backend/database/migrations/002_normalize_demo_skills.sql) unifica as primeiras chaves do seed com as usadas no cadastro, preservando associações sem duplicatas.

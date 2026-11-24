@@ -1,5 +1,7 @@
 # Próximos passos
 
+- [ ] IF-09 · Alta · Consolidar documentação, testar indisponibilidade e recuperar o serviço, confirmar o remoto.
+
 - [ ] IF-08 · Alta · Alinhar login, perfil e sugestões com o Figma e validar no navegador.
 
 - [ ] IF-07 · Alta · Entregar avaliação mútua e mural com respostas encadeadas.
