@@ -2,6 +2,8 @@
 
 ## 2026-11-24
 
+- Chat local por Socket.IO. Três testes integrados, dois unitários e build aprovados. Revisão acadêmica 3b25dc2 enviada a origin/main.
+
 - Análise visual e acadêmica dos sete originais. Registro das diferenças, regras de agenda e avaliação e revisão de privacidade dos materiais.
 
 - Matching e sugestões. Dois testes unitários, dois integrados e build aprovados.

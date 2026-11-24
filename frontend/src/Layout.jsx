@@ -1,9 +1,10 @@
 import { NavLink, Outlet, useNavigate, useSearchParams } from 'react-router-dom';
-import { Compass, LogOut, Search, UserRound } from 'lucide-react';
+import { Compass, LogOut, MessageSquare, Search, UserRound } from 'lucide-react';
 import { Avatar, Brand, Feedback } from './components.jsx';
 
 const navigation = [
   ['/', 'Sugestões', Compass],
+  ['/conversas', 'Conversas', MessageSquare],
   ['/perfil', 'Perfil', UserRound],
 ];
 

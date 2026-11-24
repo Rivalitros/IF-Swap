@@ -1,5 +1,7 @@
 # Mapa do projeto
 
+- O React usa `frontend/src/pages/Chat.jsx` e `frontend/src/realtime.jsx`. A API e o contrato estão em `backend/src/realtime.js` e `docs/api.md`.
+
 - `README/` é a fonte acadêmica e visual. `docs/revisao-academica.md` documenta rastreabilidade e limitações de compartilhamento. `docs/casos-de-uso.md` e `docs/roadmap.md` orientam a implementação.
 
 - A consulta PostgreSQL em `backend/src/repositories/matching.js` classifica compatibilidades. O frontend exibe perfis, avaliação e ações a partir dos dados da API.

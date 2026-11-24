@@ -68,9 +68,3 @@ export function PublicProfile() {
     </>}
   </>;
 }
-
-export function MatchPreview() {
-  const { id } = useParams();
-  const result = useResource(`/matches/${id}`);
-  return <><Feedback error={result.error} busy={result.busy} />{result.data && <header className="page-heading"><h1>Conversa com {result.data.peer.name}</h1></header>}</>;
-}

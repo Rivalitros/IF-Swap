@@ -1,5 +1,7 @@
 # Estado da implementação
 
+- Chat · TESTADO na API e Socket.IO. Interface compilada. Persistência, deduplicação, acesso, presença e recibos cobertos.
+
 | Área | Status | Código, dados e verificação |
 |---|---|---|
 | Referências acadêmicas | TESTADO | Sete arquivos lidos. PDFs renderizados, revisão em `docs/revisao-academica.md`. |

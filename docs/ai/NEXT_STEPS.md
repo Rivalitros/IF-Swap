@@ -1,5 +1,7 @@
 # Próximos passos
 
+- [ ] IF-06 · Alta · Implementar agenda recíproca e notificações de transição.
+
 - [x] IF-04 · Alta · Identificar e revisar os sete originais. Renderizar as páginas Figma e registrar divergências.
 - [ ] IF-05 · Alta · Finalizar chat em `backend/src/realtime.js` e frontend. Testar duas sessões, acesso, reconexão e idempotência.
 - [ ] IF-06 · Alta · Implementar agenda, calendário e notificações. Depende de IF-05. Testar reciprocidade, intervalo e transições concorrentes.

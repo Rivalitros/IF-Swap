@@ -1,16 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { api } from './api.js';
 import { Brand, Feedback } from './components.jsx';
 import { Auth } from './pages/Auth.jsx';
 import { Profile } from './pages/Profile.jsx';
 import { Layout } from './Layout.jsx';
-import { MatchPreview, PublicProfile, Suggestions } from './pages/Suggestions.jsx';
+import { PublicProfile, Suggestions } from './pages/Suggestions.jsx';
+import { Chat } from './pages/Chat.jsx';
+import { LiveProvider } from './realtime.jsx';
 
 export default function App() {
   const [user, setUser] = useState(undefined);
   const [error, setError] = useState('');
   const [attempt, setAttempt] = useState(0);
+  const clearUser = useCallback(() => setUser(null), []);
   useEffect(() => {
     const controller = new AbortController();
     api('/auth/me', { signal: controller.signal }).then(setUser, failure => {
@@ -34,7 +37,7 @@ export default function App() {
 
   if (user.onboarding_step < 4) return <Profile user={user} update={setUser} onboarding />;
 
-  return <Routes>
+  return <LiveProvider key={user.id} userId={user.id} onExpired={clearUser}><Routes>
     <Route element={<Layout user={user} error={error} onLogout={async () => {
       try { await api('/auth/logout', { method: 'POST' }); setUser(null); }
       catch (failure) { setError(failure.message); }
@@ -42,8 +45,8 @@ export default function App() {
       <Route index element={<Suggestions />} />
       <Route path="/perfil" element={<Profile user={user} update={setUser} />} />
       <Route path="/pessoas/:id" element={<PublicProfile />} />
-      <Route path="/conversas/:id" element={<MatchPreview />} />
+      <Route path="/conversas/:id?" element={<Chat user={user} />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Route>
-  </Routes>;
+  </Routes></LiveProvider>;
 }

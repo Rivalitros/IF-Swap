@@ -1,5 +1,13 @@
 # Handoff
 
+## Chat local por Socket.IO
+
+O React usa `frontend/src/pages/Chat.jsx` e `frontend/src/realtime.jsx`. A API e o contrato estão em `backend/src/realtime.js` e `docs/api.md`.
+
+Verificação: Três testes integrados, dois unitários e build aprovados. Revisão acadêmica 3b25dc2 enviada a origin/main.
+
+Próximo passo: IF-06 · Alta · Implementar agenda recíproca e notificações de transição.
+
 A primeira versão do IF Swap roda localmente e conecta a comunidade do IFSP Campus Barretos. Confira a branch e o envio com `git status -sb` e `git log -1 --oneline`.
 
 As sete referências de `README/` foram revisadas, incluindo 13 páginas do Figma visualizadas. A [matriz de revisão](../revisao-academica.md) identifica ajustes e os materiais que permanecem locais. O modelo lógico em TXT é compartilhável.

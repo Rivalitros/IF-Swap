@@ -6,6 +6,8 @@ import { migrate } from '../database/migrate.js';
 import { accountRoutes } from './routes/accounts.js';
 import { profileRoutes } from './routes/profile.js';
 import { matchingRoutes } from './routes/matching.js';
+import { chatRoutes } from './routes/chat.js';
+import { realtime } from './realtime.js';
 import { requireSession } from './services/sessions.js';
 import { uploads } from './services/profile.js';
 
@@ -19,6 +21,7 @@ export function createApplication(db) {
     throw new AppError(503, databaseMessage);
   });
   ready().catch(() => {});
+  const live = realtime(server, db, ready);
 
   app.disable('x-powered-by');
   app.use('/api', (req, res, next) => {
@@ -36,10 +39,11 @@ export function createApplication(db) {
     await db.query('SELECT 1');
     res.json({ status: 'ok', database: 'online' });
   });
-  app.use('/api/auth', accountRoutes(db, () => {}));
+  app.use('/api/auth', accountRoutes(db, live.logout));
   app.use('/api', requireSession(db));
   app.use('/api/profile', profileRoutes(db));
   app.use('/api', matchingRoutes(db));
+  app.use('/api', chatRoutes(db));
   app.use('/api/photos', express.static(fileURLToPath(uploads), { index: false, redirect: false }));
   app.use('/api', (req, res) => res.status(404).json({ error: 'Recurso não encontrado.' }));
   app.use((error, req, res, next) => {
@@ -47,5 +51,5 @@ export function createApplication(db) {
     const { status, message } = publicError(error);
     res.status(status).json({ error: message });
   });
-  return { app, server };
+  return { app, server, io: live.io };
 }

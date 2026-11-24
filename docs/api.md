@@ -28,3 +28,21 @@ Erros HTTP usam `{ "error": "Mensagem legível." }`. Códigos usados incluem 400
 | GET /users/:id | Perfil visível, habilidades e até 50 avaliações recebidas. |
 | POST /matches | `{ "userId": 2 }`. Cria ou recupera o match único do par. Uma nova conversa requer sugestão compatível. |
 | GET /matches/:id | `{ "id": 1, "peer": { "id": 2, "name": "Bruno" } }`, com os demais campos do perfil básico. Acesso pelo par. |
+
+## Conversas
+
+| Método e caminho | Entrada e retorno |
+|---|---|
+| GET /matches | Conversas recentes do usuário, par, última mensagem e contador de não lidas. |
+| GET /matches/:id/messages?before= | Até 50 mensagens em ordem ascendente. `next` é o cursor para uma página anterior, ou `null`. |
+
+Socket.IO usa o cookie da sessão na mesma origem. Eventos de cliente usam acknowledgement `{ ok: true, data }` ou `{ ok: false, status, error }`. Cada operação valida sessão e pertencimento à conversa. Salas de conta encaminham eventos somente aos envolvidos.
+
+| Cliente → servidor | Payload e resultado |
+|---|---|
+| chat:join / chat:leave | `{ matchId }`. A entrada retorna `{ peerId, online }`. |
+| chat:send | `{ matchId, clientId, content }`. UUID gerado no cliente e texto de até 2000 caracteres. A resposta contém a mensagem persistida. Repetir o UUID com o mesmo texto retorna a mesma mensagem. |
+| chat:delivered / chat:read | `{ matchId, ids }`, de 1 a 50 IDs. Marca mensagens recebidas do outro participante e retorna `{ updated }`. |
+| chat:typing | `{ matchId, active }`. Requer entrada na sala. |
+
+O servidor emite `chat:message` com o objeto persistido, `chat:receipt` com `{ matchId, messages }`, `chat:presence` com `{ userId, online }` e `chat:typing` com `{ matchId, userId, active }`. São três estados de mensagem. **Enviada** significa commit no banco. **Recebida** significa confirmação de uma sessão do destinatário. **Lida** significa carregada em uma conversa aberta e com a aba visível. Após reconectar, o cliente recarrega o histórico PostgreSQL e novas páginas podem ser consultadas; o Socket.IO sozinho não garante recuperação de eventos perdidos.
