@@ -1,8 +1,7 @@
-import { createServer } from 'node:http';
-import express from 'express';
+import { createApplication } from './app.js';
 import { host, port } from './config.js';
+import { createPool } from './db.js';
 
-const app = express();
-app.disable('x-powered-by');
-app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
-createServer(app).listen(port, host, () => console.log(`IF Swap em http://${host}:${port}`));
+const db = createPool();
+const { server } = createApplication(db);
+server.listen(port, host, () => console.log(`IF Swap em http://${host}:${port}`));

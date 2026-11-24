@@ -1,5 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import '@fontsource-variable/plus-jakarta-sans';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App.jsx';
+import './styles.css';
 
-createRoot(document.getElementById('root')).render(<main><h1>IF Swap</h1><p>Plataforma de troca de habilidades</p></main>);
+createRoot(document.getElementById('root')).render(<BrowserRouter><App /></BrowserRouter>);

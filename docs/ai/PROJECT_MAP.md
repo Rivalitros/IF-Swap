@@ -1,5 +1,7 @@
 # Mapa do projeto
 
+- Os contratos de conta e perfil estão em `docs/api.md`. O React inicia o onboarding em três etapas após cadastro e retoma do passo persistido.
+
 - O schema e o seed ficam em `backend/database/`. A API usa o pool em `backend/src/db.js`.
 
 - O frontend em `frontend/` usa o proxy Vite para a API em `backend/`. O arquivo `.env.example` documenta a configuração inicial.

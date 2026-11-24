@@ -1,5 +1,7 @@
 # Estado da implementação
 
+- Conta, login, perfil e habilidades · TESTADO na API. Frontend integrado e compilado.
+
 - Banco · TESTADO. Setup, migrações e seed executados duas vezes em PostgreSQL local isolado.
 
 - Estrutura frontend e API HTTP · TESTADO (build e sintaxe)

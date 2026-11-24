@@ -1,5 +1,13 @@
 # Handoff
 
+## Contas, perfil e habilidades
+
+Os contratos de conta e perfil estão em `docs/api.md`. O React inicia o onboarding em três etapas após cadastro e retoma do passo persistido.
+
+Verificação: Dois testes unitários, um teste integrado e build aprovados. Checkpoint PostgreSQL 70a9bf2 enviado a origin/main.
+
+Próximo passo: IF-03b · Alta · Calcular sugestões e iniciar uma conversa por par compatível.
+
 ## Migrações e seed PostgreSQL
 
 O schema e o seed ficam em `backend/database/`. A API usa o pool em `backend/src/db.js`.

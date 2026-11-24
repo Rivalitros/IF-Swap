@@ -1,5 +1,7 @@
 # Próximos passos
 
+- [ ] IF-03b · Alta · Calcular sugestões e iniciar uma conversa por par compatível.
+
 - [ ] IF-03a · Alta · Implementar sessão, onboarding e habilidades sobre o schema inicial.
 
 - [ ] IF-02 · Alta · Implementar e validar schema e setup PostgreSQL.
