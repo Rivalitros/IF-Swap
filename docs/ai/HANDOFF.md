@@ -1,5 +1,13 @@
 # Handoff
 
+## Migrações e seed PostgreSQL
+
+O schema e o seed ficam em `backend/database/`. A API usa o pool em `backend/src/db.js`.
+
+Verificação: Dois setups e dois seeds com PostgreSQL local na porta 55432. Checkpoint da estrutura 8562101 enviado a origin/main.
+
+Próximo passo: IF-03a · Alta · Implementar sessão, onboarding e habilidades sobre o schema inicial.
+
 ## Estrutura React, Express e npm workspaces
 
 O frontend em `frontend/` usa o proxy Vite para a API em `backend/`. O arquivo `.env.example` documenta a configuração inicial.

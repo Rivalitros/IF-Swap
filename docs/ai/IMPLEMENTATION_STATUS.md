@@ -1,5 +1,7 @@
 # Estado da implementação
 
+- Banco · TESTADO. Setup, migrações e seed executados duas vezes em PostgreSQL local isolado.
+
 - Estrutura frontend e API HTTP · TESTADO (build e sintaxe)
 
 | Área | Status | Aceitação |

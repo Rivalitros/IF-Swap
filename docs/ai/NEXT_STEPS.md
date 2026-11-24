@@ -1,5 +1,7 @@
 # Próximos passos
 
+- [ ] IF-03a · Alta · Implementar sessão, onboarding e habilidades sobre o schema inicial.
+
 - [ ] IF-02 · Alta · Implementar e validar schema e setup PostgreSQL.
 
 - [ ] IF-01 · Alta · Preparar workspaces, API de saúde e frontend Vite. Validar instalação e build.
