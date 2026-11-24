@@ -2,6 +2,8 @@
 
 ## 2026-11-24
 
+- Matching e sugestões. Dois testes unitários, dois integrados e build aprovados.
+
 - Contas, perfil e habilidades. Dois testes unitários, um teste integrado e build aprovados. Checkpoint PostgreSQL 70a9bf2 enviado a origin/main.
 
 - Migrações e seed PostgreSQL. Dois setups e dois seeds com PostgreSQL local na porta 55432. Checkpoint da estrutura 8562101 enviado a origin/main.

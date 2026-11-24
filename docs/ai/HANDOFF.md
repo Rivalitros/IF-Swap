@@ -1,5 +1,13 @@
 # Handoff
 
+## Matching e sugestões
+
+A consulta PostgreSQL em `backend/src/repositories/matching.js` classifica compatibilidades. O frontend exibe perfis, avaliação e ações a partir dos dados da API.
+
+Verificação: Dois testes unitários, dois integrados e build aprovados.
+
+Próximo passo: IF-03c · Alta · Implementar chat Socket.IO e testar comunicação, reconexão e persistência.
+
 ## Contas, perfil e habilidades
 
 Os contratos de conta e perfil estão em `docs/api.md`. O React inicia o onboarding em três etapas após cadastro e retoma do passo persistido.

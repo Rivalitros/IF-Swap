@@ -1,5 +1,7 @@
 # Próximos passos
 
+- [ ] IF-03c · Alta · Implementar chat Socket.IO e testar comunicação, reconexão e persistência.
+
 - [ ] IF-03b · Alta · Calcular sugestões e iniciar uma conversa por par compatível.
 
 - [ ] IF-03a · Alta · Implementar sessão, onboarding e habilidades sobre o schema inicial.

@@ -5,6 +5,7 @@ import { AppError, checkOrigin, databaseMessage, publicError } from './http.js';
 import { migrate } from '../database/migrate.js';
 import { accountRoutes } from './routes/accounts.js';
 import { profileRoutes } from './routes/profile.js';
+import { matchingRoutes } from './routes/matching.js';
 import { requireSession } from './services/sessions.js';
 import { uploads } from './services/profile.js';
 
@@ -38,6 +39,7 @@ export function createApplication(db) {
   app.use('/api/auth', accountRoutes(db, () => {}));
   app.use('/api', requireSession(db));
   app.use('/api/profile', profileRoutes(db));
+  app.use('/api', matchingRoutes(db));
   app.use('/api/photos', express.static(fileURLToPath(uploads), { index: false, redirect: false }));
   app.use('/api', (req, res) => res.status(404).json({ error: 'Recurso não encontrado.' }));
   app.use((error, req, res, next) => {

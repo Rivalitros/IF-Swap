@@ -1,5 +1,7 @@
 # Estado da implementação
 
+- Matching · TESTADO, incluindo busca, privacidade e criação concorrente de um único par. Interface compilada.
+
 - Conta, login, perfil e habilidades · TESTADO na API. Frontend integrado e compilado.
 
 - Banco · TESTADO. Setup, migrações e seed executados duas vezes em PostgreSQL local isolado.

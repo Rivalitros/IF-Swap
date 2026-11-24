@@ -19,3 +19,12 @@ O React acessa o mesmo origin do navegador pelo proxy Vite. Os recursos usam JSO
 `affiliation` aceita `aluno`, `professor` e `funcionario`. O tipo de habilidade é `teach` ou `learn`.
 
 Erros HTTP usam `{ "error": "Mensagem legível." }`. Códigos usados incluem 400 (validação), 401 (sessão ausente ou inválida), 403 (origem ou ação proibida), 404 (recurso indisponível), 409 (conflito), 413 (limite do corpo), 500 (falha inesperada) e 503 (PostgreSQL indisponível).
+
+## Sugestões e perfis
+
+| Método e caminho | Entrada e retorno |
+|---|---|
+| GET /suggestions?q= | Pesquisa opcional por pessoa, setor ou habilidade. Retorna até 100 perfis compatíveis com direção de troca, reputação e contagem. |
+| GET /users/:id | Perfil visível, habilidades e até 50 avaliações recebidas. |
+| POST /matches | `{ "userId": 2 }`. Cria ou recupera o match único do par. Uma nova conversa requer sugestão compatível. |
+| GET /matches/:id | `{ "id": 1, "peer": { "id": 2, "name": "Bruno" } }`, com os demais campos do perfil básico. Acesso pelo par. |

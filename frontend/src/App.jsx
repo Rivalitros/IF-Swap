@@ -4,6 +4,8 @@ import { api } from './api.js';
 import { Brand, Feedback } from './components.jsx';
 import { Auth } from './pages/Auth.jsx';
 import { Profile } from './pages/Profile.jsx';
+import { Layout } from './Layout.jsx';
+import { MatchPreview, PublicProfile, Suggestions } from './pages/Suggestions.jsx';
 
 export default function App() {
   const [user, setUser] = useState(undefined);
@@ -32,11 +34,16 @@ export default function App() {
 
   if (user.onboarding_step < 4) return <Profile user={user} update={setUser} onboarding />;
 
-  return <main className="workspace">
-    <header className="profile-header"><Brand /><button className="secondary" onClick={async () => {
+  return <Routes>
+    <Route element={<Layout user={user} error={error} onLogout={async () => {
       try { await api('/auth/logout', { method: 'POST' }); setUser(null); }
       catch (failure) { setError(failure.message); }
-    }}>Sair</button></header>
-    <Feedback error={error} /><Profile user={user} update={setUser} />
-  </main>;
+    }} />}>
+      <Route index element={<Suggestions />} />
+      <Route path="/perfil" element={<Profile user={user} update={setUser} />} />
+      <Route path="/pessoas/:id" element={<PublicProfile />} />
+      <Route path="/conversas/:id" element={<MatchPreview />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Route>
+  </Routes>;
 }
