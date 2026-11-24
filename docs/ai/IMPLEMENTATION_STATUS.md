@@ -1,5 +1,7 @@
 # Estado da implementação
 
+- Estrutura frontend e API HTTP · TESTADO (build e sintaxe)
+
 | Área | Status | Aceitação |
 |---|---|---|
 | Git e documentação | EM DESENVOLVIMENTO | Checkpoints e remoto verificados |
