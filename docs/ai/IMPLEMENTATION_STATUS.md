@@ -1,17 +1,12 @@
 # Estado da implementação
 
-- Matching · TESTADO, incluindo busca, privacidade e criação concorrente de um único par. Interface compilada.
-
-- Conta, login, perfil e habilidades · TESTADO na API. Frontend integrado e compilado.
-
-- Banco · TESTADO. Setup, migrações e seed executados duas vezes em PostgreSQL local isolado.
-
-- Estrutura frontend e API HTTP · TESTADO (build e sintaxe)
-
-| Área | Status | Aceitação |
+| Área | Status | Código, dados e verificação |
 |---|---|---|
-| Git e documentação | EM DESENVOLVIMENTO | Checkpoints e remoto verificados |
-| Referências acadêmicas | BLOQUEADO | Conferir DER, modelo lógico, casos de uso e telas da pasta README/ |
-| Frontend React/Vite | NÃO INICIADO | Compilação e fluxos responsivos |
-| API Express/Socket.IO | NÃO INICIADO | Fluxos HTTP e chat entre sessões |
-| PostgreSQL | NÃO INICIADO | Setup, migrações e seed idempotentes |
+| Referências acadêmicas | TESTADO | Sete arquivos lidos. PDFs renderizados, revisão em `docs/revisao-academica.md`. |
+| PostgreSQL | TESTADO | `backend/database/`, setup e seed idempotentes verificados no PostgreSQL local. |
+| Contas e perfil | TESTADO | Rotas `/api/auth` e `/api/profile`, tabelas users, sessions, skills e user_skills. Backend coberto e frontend compilado. |
+| Matching | TESTADO | `/api/suggestions`, `/api/matches`, tabela matches. Teste de reciprocidade, privacidade e duplicação. |
+| Chat | EM DESENVOLVIMENTO | API Socket.IO iniciada. Falta integrar a tela e exercitar histórico e reconexão. |
+| Agenda e avaliações | NÃO INICIADO | Schema preparado. Validar reciprocidade, estados, conflitos, final do encontro e avaliação mútua. |
+| Mural | NÃO INICIADO | Schema preparado. Entregar API e tela com respostas encadeadas. |
+| Fidelidade à interface | EM DESENVOLVIMENTO | Corrigir login/cadastro, onboarding e sugestões conforme páginas 1–13. |

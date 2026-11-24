@@ -2,6 +2,8 @@
 
 ## 2026-11-24
 
+- Análise visual e acadêmica dos sete originais. Registro das diferenças, regras de agenda e avaliação e revisão de privacidade dos materiais.
+
 - Matching e sugestões. Dois testes unitários, dois integrados e build aprovados.
 
 - Contas, perfil e habilidades. Dois testes unitários, um teste integrado e build aprovados. Checkpoint PostgreSQL 70a9bf2 enviado a origin/main.

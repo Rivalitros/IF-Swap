@@ -1,0 +1,38 @@
+Usuario (CodUsuario, Nome, Email, Reputacao, Perfil_Publico)
+
+Habilidade (CodHabilidade, Nome, Descricao, Categoria)
+
+Usuario_Habilidade (CodUsuario*, CodHabilidade*, Tipo, Curso_Setor, Data_Registro)
+  PK composta: (CodUsuario, CodHabilidade)
+  CodUsuario referencia Usuario
+  CodHabilidade referencia Habilidade
+
+Mural_Desafio (CodDesafio, Descricao, Prazo, Status, CodUsuario*)
+  CodUsuario referencia Usuario  (autor do desafio)
+
+Resposta_Mural (CodResposta, Mensagem, Status, Data_Resposta,
+                CodDesafio*, CodUsuario*, CodRespostaPai*)
+  CodDesafio referencia Mural_Desafio
+  CodUsuario referencia Usuario  (autor da resposta)
+  CodRespostaPai referencia Resposta_Mural  (auto-relacionamento; nulo se for resposta raiz)
+
+Match (CodMatch, Status, Data_Criacao)
+
+Participa (CodUsuario*, CodMatch*)
+  PK composta: (CodUsuario, CodMatch)
+  CodUsuario referencia Usuario
+  CodMatch referencia Match
+  (regra de negócio: cada CodMatch deve ter exatamente 2 linhas nesta tabela)
+
+Mensagem (CodMensagem, Conteudo, Data_Envio, CodMatch*, CodUsuario*)
+  CodMatch referencia Match
+  CodUsuario referencia Usuario  (remetente)
+
+Agendamento (CodAgendamento, Data_Hora, Local, Status, CodUsuario*)
+  CodUsuario referencia Usuario
+
+Avaliacao (CodAvaliacao, Data, Nota, Comentario,
+           CodAgendamento* UNIQUE, CodAvaliador*, CodAvaliado*)
+  CodAgendamento referencia Agendamento
+  CodAvaliador referencia Usuario
+  CodAvaliado referencia Usuario

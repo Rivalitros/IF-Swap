@@ -1,39 +1,9 @@
 # Handoff
 
-## Matching e sugestões
+A primeira versão do IF Swap roda localmente e conecta a comunidade do IFSP Campus Barretos. Confira a branch e o envio com `git status -sb` e `git log -1 --oneline`.
 
-A consulta PostgreSQL em `backend/src/repositories/matching.js` classifica compatibilidades. O frontend exibe perfis, avaliação e ações a partir dos dados da API.
+As sete referências de `README/` foram revisadas, incluindo 13 páginas do Figma visualizadas. A [matriz de revisão](../revisao-academica.md) identifica ajustes e os materiais que permanecem locais. O modelo lógico em TXT é compartilhável.
 
-Verificação: Dois testes unitários, dois integrados e build aprovados.
+Checkpoint anterior da aplicação: `ce3e32d` em `main`, enviado a `origin/main`. Cadastro, login, perfil, habilidades, matching e criação do par já passaram em testes integrados. Os arquivos da API Socket.IO em andamento estão no workspace local. A próxima etapa integra o frontend do chat e valida duas sessões, seguida por agenda recíproca, avaliação pós-encontro, mural e correções visuais.
 
-Próximo passo: IF-03c · Alta · Implementar chat Socket.IO e testar comunicação, reconexão e persistência.
-
-## Contas, perfil e habilidades
-
-Os contratos de conta e perfil estão em `docs/api.md`. O React inicia o onboarding em três etapas após cadastro e retoma do passo persistido.
-
-Verificação: Dois testes unitários, um teste integrado e build aprovados. Checkpoint PostgreSQL 70a9bf2 enviado a origin/main.
-
-Próximo passo: IF-03b · Alta · Calcular sugestões e iniciar uma conversa por par compatível.
-
-## Migrações e seed PostgreSQL
-
-O schema e o seed ficam em `backend/database/`. A API usa o pool em `backend/src/db.js`.
-
-Verificação: Dois setups e dois seeds com PostgreSQL local na porta 55432. Checkpoint da estrutura 8562101 enviado a origin/main.
-
-Próximo passo: IF-03a · Alta · Implementar sessão, onboarding e habilidades sobre o schema inicial.
-
-## Estrutura React, Express e npm workspaces
-
-O frontend em `frontend/` usa o proxy Vite para a API em `backend/`. O arquivo `.env.example` documenta a configuração inicial.
-
-Verificação: Instalação npm e build Vite concluídos. Checkpoint inicial 4d4bd79 enviado a origin/main.
-
-Próximo passo: IF-02 · Alta · Implementar e validar schema e setup PostgreSQL.
-
-O IF Swap é uma plataforma escolar de troca de habilidades para execução local. O objetivo da fase 1 inclui cadastro, perfis, matching, conversas em tempo real, agenda, reputação e mural.
-
-Checkpoint inicial em `main`. A raiz contém o prompt mestre entregue localmente, porém falta o diretório `README/`; DER, modelo lógico, formulários e protótipos associados não puderam ser analisados. O remoto preexistente é `origin`. Consulte `git log -1 --oneline` e `git branch -vv` para verificar hashes e upstream.
-
-Continue pelo roteiro em [NEXT_STEPS.md](NEXT_STEPS.md) e consulte as [decisões](DECISIONS.md) antes de alterar o modelo.
+Use `npm ci`, configure `.env` a partir do exemplo, `npm run setup`, `npm run seed` e `npm run dev`. Testes em `backend/test/`. Veja o [mapa](PROJECT_MAP.md) e a [lista de próximas etapas](NEXT_STEPS.md).

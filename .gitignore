@@ -15,3 +15,6 @@ backups/
 .codex/
 .npm-cache/
 .local-tools/
+# Originais acadêmicos com contatos ou outros dados identificáveis.
+/README/*.pdf
+/README/*.docx

@@ -1,14 +1,8 @@
 # Próximos passos
 
-- [ ] IF-03c · Alta · Implementar chat Socket.IO e testar comunicação, reconexão e persistência.
-
-- [ ] IF-03b · Alta · Calcular sugestões e iniciar uma conversa por par compatível.
-
-- [ ] IF-03a · Alta · Implementar sessão, onboarding e habilidades sobre o schema inicial.
-
-- [ ] IF-02 · Alta · Implementar e validar schema e setup PostgreSQL.
-
-- [ ] IF-01 · Alta · Preparar workspaces, API de saúde e frontend Vite. Validar instalação e build.
-- [ ] IF-02 · Alta · Migrar e popular PostgreSQL local. Depende de IF-01. Testar inicialização repetida.
-- [ ] IF-03 · Alta · Implementar os fluxos acadêmicos na API e no React. Depende de IF-02. Testar duas sessões.
-- [ ] IF-04 · Alta · Analisar originais de README/ quando fornecidos. Conferir diferenças de modelo, fluxos e telas.
+- [x] IF-04 · Alta · Identificar e revisar os sete originais. Renderizar as páginas Figma e registrar divergências.
+- [ ] IF-05 · Alta · Finalizar chat em `backend/src/realtime.js` e frontend. Testar duas sessões, acesso, reconexão e idempotência.
+- [ ] IF-06 · Alta · Implementar agenda, calendário e notificações. Depende de IF-05. Testar reciprocidade, intervalo e transições concorrentes.
+- [ ] IF-07 · Alta · Implementar avaliação ao final do encontro e mural encadeado. Testar autorização, reputação e encerramento.
+- [ ] IF-08 · Alta · Alinhar login, cadastro, onboarding e sugestões com o PDF. Comparar desktop e mobile.
+- [ ] IF-09 · Alta · Testar aplicação integrada, atualizar documentação e verificar o push final.
