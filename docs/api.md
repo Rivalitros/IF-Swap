@@ -47,6 +47,8 @@ Socket.IO usa o cookie da sessão na mesma origem. Eventos de cliente usam ackno
 
 O servidor emite `chat:message` com o objeto persistido, `chat:receipt` com `{ matchId, messages }`, `chat:presence` com `{ userId, online }` e `chat:typing` com `{ matchId, userId, active }`. São três estados de mensagem. **Enviada** significa commit no banco. **Recebida** significa confirmação de uma sessão do destinatário. **Lida** significa carregada em uma conversa aberta e com a aba visível. Após reconectar, o cliente recarrega o histórico PostgreSQL e novas páginas podem ser consultadas; o Socket.IO sozinho não garante recuperação de eventos perdidos.
 
+O evento `auth:expired` informa que a sessão do socket foi revogada ou venceu. O servidor desconecta os sockets da sessão, e o React volta ao login. Uma mensagem recebida fora da conversa aberta gera um aviso com acesso ao chat.
+
 ## Agenda
 
 | Método e caminho | Entrada e retorno |

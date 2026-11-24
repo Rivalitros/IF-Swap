@@ -20,6 +20,7 @@ export function LiveProvider({ userId, children, onExpired }) {
   const [connected, setConnected] = useState(false);
   const [version, setVersion] = useState(0);
   const [scheduleEvent, setScheduleEvent] = useState(null);
+  const [messageEvent, setMessageEvent] = useState(null);
 
   useEffect(() => {
     const connect = () => { setConnected(true); setVersion(value => value + 1); };
@@ -34,6 +35,7 @@ export function LiveProvider({ userId, children, onExpired }) {
     const onMessage = message => {
       setVersion(value => value + 1);
       if (message.sender_id !== userId) {
+        setMessageEvent(message);
         request(socket, 'chat:delivered', { matchId: message.match_id, ids: [message.id] }).catch(() => {});
       }
     };
@@ -42,18 +44,19 @@ export function LiveProvider({ userId, children, onExpired }) {
       setVersion(value => value + 1);
     };
     const onReceipt = () => setVersion(value => value + 1);
-    socket.on('connect', connect).on('disconnect', disconnect).on('connect_error', onError);
+    socket.on('connect', connect).on('disconnect', disconnect).on('connect_error', onError).on('auth:expired', onExpired);
     socket.on('chat:message', onMessage).on('chat:receipt', onReceipt).on('agenda:update', onSchedule);
     socket.connect();
     return () => {
       clearTimeout(retryTimer);
-      socket.off('connect', connect).off('disconnect', disconnect).off('connect_error', onError);
+      socket.off('connect', connect).off('disconnect', disconnect).off('connect_error', onError).off('auth:expired', onExpired);
       socket.off('chat:message', onMessage).off('chat:receipt', onReceipt).off('agenda:update', onSchedule);
       socket.disconnect();
     };
   }, [socket, userId, onExpired]);
 
-  const value = useMemo(() => ({ socket, connected, version, scheduleEvent, dismissSchedule: () => setScheduleEvent(null) }),
-    [socket, connected, version, scheduleEvent]);
+  const value = useMemo(() => ({ socket, connected, version, scheduleEvent, messageEvent,
+    dismissSchedule: () => setScheduleEvent(null), dismissMessage: () => setMessageEvent(null) }),
+  [socket, connected, version, scheduleEvent, messageEvent]);
   return <LiveContext.Provider value={value}>{children}</LiveContext.Provider>;
 }

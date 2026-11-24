@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { CalendarDays, LayoutGrid, Link2, MessageSquare, Search, UserRound, X } from 'lucide-react';
 import { Avatar, Brand, Feedback } from './components.jsx';
 import { useLive } from './realtime.jsx';
@@ -12,7 +12,9 @@ const navigation = [
 ];
 
 export function Layout({ user, error }) {
-  const { scheduleEvent, dismissSchedule } = useLive();
+  const { scheduleEvent, dismissSchedule, messageEvent, dismissMessage } = useLive();
+  const { pathname } = useLocation();
+  const messageLink = messageEvent ? `/conversas/${messageEvent.match_id}` : null;
   const navigate = useNavigate();
   const [search] = useSearchParams();
   const query = search.get('q') || '';
@@ -37,6 +39,10 @@ export function Layout({ user, error }) {
         <Link className="account-shortcut" to="/perfil" aria-label="Meu perfil"><Avatar person={user} /></Link>
       </header>
       <main className="workspace"><Feedback error={error} />
+        {messageLink && pathname !== messageLink && <div className="agenda-notice" role="status">
+          <Link to={messageLink} onClick={dismissMessage}>Nova mensagem. Abrir conversa.</Link>
+          <button className="icon-button" onClick={dismissMessage} aria-label="Dispensar aviso de mensagem"><X size={16} /></button>
+        </div>}
         {scheduleEvent && <div className="agenda-notice" role="status">
           <Link to="/agenda" onClick={dismissSchedule}>{scheduleEvent.status === 'concluido'
             ? 'Encontro concluído. Avalie a sua troca na agenda.' : 'Seu agendamento foi atualizado. Ver agenda.'}</Link>

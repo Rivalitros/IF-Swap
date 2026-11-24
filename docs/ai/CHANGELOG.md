@@ -2,6 +2,8 @@
 
 ## 2026-11-24
 
+- Finalização da fase local. Aviso de mensagens fora da conversa, encerramento de sockets ao revogar sessão e documentação de operação, recuperação e backup. Testes no Edge, suíte PostgreSQL e build. API verificada durante parada e recuperação do banco.
+
 - Alinhamento visual e correção das habilidades de demonstração. Dois testes unitários, seis integrados, build e dupla sessão no navegador aprovados.
 
 - Avaliações, reputação e mural. Cinco testes integrados, dois unitários e build aprovados. Agenda 15758c4 enviada a origin/main.

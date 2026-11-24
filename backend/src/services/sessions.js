@@ -12,11 +12,15 @@ export function sessionHash(cookieHeader) {
   return token ? digest(token) : null;
 }
 
-export async function sessionUser(db, hash) {
+export async function activeSession(db, hash) {
   if (!hash) throw new AppError(401, 'Entre para continuar.');
-  const session = await first(db, 'SELECT user_id FROM sessions WHERE token_hash = $1 AND expires_at > now()', [hash]);
+  const session = await first(db, 'SELECT user_id,expires_at FROM sessions WHERE token_hash = $1 AND expires_at > now()', [hash]);
   if (!session) throw new AppError(401, 'Sua sessão expirou. Entre novamente.');
-  return session.user_id;
+  return session;
+}
+
+export async function sessionUser(db, hash) {
+  return (await activeSession(db, hash)).user_id;
 }
 
 export async function startSession(db, res, userId) {

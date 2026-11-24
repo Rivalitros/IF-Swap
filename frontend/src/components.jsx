@@ -17,9 +17,9 @@ export function Avatar({ person, size = '' }) {
 
 export function Field({ label, children, ...props }) {
   const id = useId();
-  return <label className="field" htmlFor={id}><span>{label}</span>
+  return <div className="field"><label htmlFor={id}>{label}</label>
     {children ? children(id) : <input id={id} {...props} />}
-  </label>;
+  </div>;
 }
 
 export function Feedback({ error, busy }) {

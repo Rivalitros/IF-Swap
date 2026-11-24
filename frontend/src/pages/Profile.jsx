@@ -9,11 +9,15 @@ const stepDescriptions = ['Comece com sua foto, seu nome e seu curso ou setor.',
   'Adicione até 5 habilidades que você gostaria de aprender.'];
 const examples = { teach: ['Desenho', 'Edição de vídeo', 'Programação', 'Matemática', 'Violão'], learn: ['Programação', 'Matemática', 'Violão', 'Desenho', 'Edição de vídeo'] };
 
-function SkillEditor({ user, kind, change }) {
+function SkillEditor({ user, kind, change, onBusy }) {
   const action = useAction();
   const [name, setName] = useState('');
   const items = user.skills[kind];
-  const add = value => action.run(async () => {
+  function edit(task) {
+    onBusy?.(true);
+    return action.run(task).finally(() => onBusy?.(false));
+  }
+  const add = value => edit(async () => {
     change(await api('/profile/skills', { method: 'POST', body: { name: value, kind } }));
     setName('');
   });
@@ -21,7 +25,7 @@ function SkillEditor({ user, kind, change }) {
   return <section className="skill-editor">
     <div className="section-heading"><h3>{kind === 'teach' ? 'Eu ensino' : 'Eu quero aprender'}</h3><span className="tag">{items.length} de 5</span></div>
     {items.length > 0 && <div className="tags">{items.map(skill => <span className={`tag ${kind === 'learn' ? 'outlined' : ''}`} key={skill.id}>{skill.name}
-      <button type="button" className="icon-button" disabled={action.busy} aria-label={`Remover ${skill.name}`} onClick={() => action.run(async () => change(await api(`/profile/skills/${kind}/${skill.id}`, { method: 'DELETE' })))}><X size={13} /></button>
+      <button type="button" className="icon-button" disabled={action.busy} aria-label={`Remover ${skill.name}`} onClick={() => edit(async () => change(await api(`/profile/skills/${kind}/${skill.id}`, { method: 'DELETE' })))}><X size={13} /></button>
     </span>)}</div>}
     <form className="field-row add-skill" onSubmit={event => { event.preventDefault(); add(name); }}>
       <Field label="Nova habilidade" placeholder="Digite uma habilidade" value={name} onChange={event => setName(event.target.value)} maxLength={60} required disabled={items.length >= 5} />
@@ -34,7 +38,7 @@ function SkillEditor({ user, kind, change }) {
   </section>;
 }
 
-function PhotoField({ user, update }) {
+function PhotoField({ user, update, onBusy, disabled }) {
   const input = useRef();
   const action = useAction();
   return <div className="photo-field">
@@ -45,20 +49,25 @@ function PhotoField({ user, update }) {
       if (!file) return;
       const body = new FormData();
       body.set('photo', file);
-      action.run(async () => update(await api('/profile/photo', { method: 'PUT', body })));
+      onBusy?.(true);
+      action.run(async () => update(await api('/profile/photo', { method: 'PUT', body }))).finally(() => onBusy?.(false));
     }} />
-    <button type="button" className="subtle" disabled={action.busy} onClick={() => input.current.click()}>{user.photo ? 'Alterar foto' : 'Adicionar foto'}</button>
+    <button type="button" className="subtle" disabled={action.busy || disabled} onClick={() => input.current.click()}>{user.photo ? 'Alterar foto' : 'Adicionar foto'}</button>
     <Feedback error={action.error} />
   </div>;
 }
 
 function ProfileForm({ user, update, next, formId, onBusy }) {
   const save = useAction();
+  const [uploading, setUploading] = useState(false);
   return <>
-    <PhotoField user={user} update={update} />
+    <PhotoField user={user} update={update} disabled={save.busy} onBusy={value => {
+      setUploading(value);
+      onBusy?.(value);
+    }} />
     <form id={formId} className="form-stack" onSubmit={event => {
       event.preventDefault();
-      if (save.busy) return;
+      if (save.busy || uploading) return;
       const fd = new FormData(event.currentTarget);
       const body = { ...Object.fromEntries(fd), affiliation: fd.get('affiliation') || user.affiliation,
         is_public: next ? user.is_public : fd.has('is_public') };
@@ -75,7 +84,7 @@ function ProfileForm({ user, update, next, formId, onBusy }) {
         <label className="checkbox"><input type="checkbox" name="is_public" defaultChecked={user.is_public} /> Mostrar meu perfil nas sugestões</label>
       </>}
       <Feedback error={save.error} />
-      {!next && <button className="primary" disabled={save.busy}>Salvar perfil</button>}
+      {!next && <button className="primary" disabled={save.busy || uploading}>Salvar perfil</button>}
     </form>
   </>;
 }
@@ -113,13 +122,13 @@ export function Profile({ user, update, onboarding = false, onLogout }) {
         <div className="setup-content">
           <header><h1>{stepTitles[step - 1]}</h1><p className="muted">{stepDescriptions[step - 1]}</p></header>
           {step === 1 ? <ProfileForm user={user} update={update} next={advance} formId={formId} onBusy={setSaving} />
-            : <SkillEditor key={step} user={user} kind={step === 2 ? 'teach' : 'learn'} change={update} />}
+            : <SkillEditor key={step} user={user} kind={step === 2 ? 'teach' : 'learn'} change={update} onBusy={setSaving} />}
           <Feedback error={action.error} />
         </div>
         <div className="setup-actions">
-          {step > 1 && <button className="text-button" onClick={() => setBackStep(step - 1)}>Voltar</button>}
+          {step > 1 && <button className="text-button" disabled={action.busy || saving} onClick={() => setBackStep(step - 1)}>Voltar</button>}
           {step === 1 ? <button className="primary" type="submit" form={formId} disabled={saving}>Continuar</button>
-            : <button className="primary" disabled={action.busy} onClick={() => action.run(advance)}>{step === 3 ? 'Concluir perfil' : 'Continuar'}</button>}
+            : <button className="primary" disabled={action.busy || saving} onClick={() => action.run(advance)}>{step === 3 ? 'Concluir perfil' : 'Continuar'}</button>}
         </div>
       </section>
     </div>

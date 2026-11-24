@@ -175,7 +175,10 @@ function uuid() {
 
 export function Chat({ user }) {
   const { id } = useParams();
-  const { version } = useLive();
+  const { version, messageEvent, dismissMessage } = useLive();
+  useEffect(() => {
+    if (messageEvent?.match_id === Number(id) && !document.hidden) dismissMessage();
+  }, [id, messageEvent, dismissMessage]);
   const list = useResource('/matches', version);
   const active = useResource(id ? `/matches/${id}` : null);
   return <>

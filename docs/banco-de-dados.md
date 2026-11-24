@@ -15,6 +15,18 @@ A [migração inicial](../backend/database/migrations/001_initial.sql) é a font
 | RESPOSTA_MURAL | challenge_replies | FKs para autor e desafio. FK composta garante que a resposta pai pertença ao mesmo desafio. |
 | Sessão técnica | sessions | Hash do token como PK, FK para usuário e expiração. |
 
-A reputação é calculada pela média das notas recebidas. As autorizações por participante, transições de estado e conflitos de intervalos pertencem à API. A comparação com os documentos originais permanece pendente.
+A reputação é calculada pela média das notas recebidas. As autorizações por participante, transições de estado e conflitos de intervalos pertencem à API.
 
 A [revisão acadêmica](revisao-academica.md) confirma o vínculo do agendamento com o match e a cardinalidade de zero a duas avaliações por encontro. A [migração 002](../backend/database/migrations/002_normalize_demo_skills.sql) unifica as primeiras chaves do seed com as usadas no cadastro, preservando associações sem duplicatas.
+
+## Backup e restauração privados
+
+Suspenda as escritas da aplicação enquanto obtém o dump e copia `backend/uploads/`. Execute o cliente PostgreSQL com os parâmetros do seu ambiente. No Windows, use o caminho completo do executável se o instalador não o colocou no PATH. O exemplo usa o banco padrão e um diretório privado já criado.
+
+```powershell
+pg_dump -h 127.0.0.1 -p 5432 -U postgres -W -Fc -f "D:\BackupsPrivados\if_swap.dump" -d if_swap
+createdb -h 127.0.0.1 -p 5432 -U postgres -W if_swap_restaurado
+pg_restore -h 127.0.0.1 -p 5432 -U postgres -W --exit-on-error -d if_swap_restaurado "D:\BackupsPrivados\if_swap.dump"
+```
+
+Guarde o dump e a cópia de uploads em armazenamento privado. Teste a restauração em banco vazio como no exemplo e recoloque as fotos na pasta local correspondente. Configure o `.env` com o banco restaurado para conferir registros e fotos. Uma restauração em banco existente deve ser planejada pelo responsável pelos dados.

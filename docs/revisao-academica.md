@@ -21,4 +21,4 @@ Em Edge, foram capturadas as telas de login, cadastro, etapas de configuração 
 
 ### Revisão para versionamento
 
-Os formulários, PDFs e protótipo contêm combinações de nomes, turma, contatos pessoais ou metadados de autoria. Seus originais ficam em `README/` no computador e são preservados integralmente. O TXT com o modelo relacional foi revisado e pode ser versionado. Em outro computador, obtenha os demais documentos pelo canal privado acadêmico e coloque-os em `README/`. A síntese nesta página permite continuar sem contatos pessoais ou reprodução dos protótipos em Git.
+Os formulários, PDFs e protótipo contêm combinações de nomes, turma, contatos pessoais ou metadados de autoria. Seus originais ficam em `README/` no computador e são preservados integralmente. O TXT com o modelo relacional foi revisado e versionado com os bytes do original. Em outro computador, obtenha os demais documentos pelo canal privado acadêmico e coloque-os em `README/`. A síntese nesta página permite continuar sem contatos pessoais ou reprodução dos protótipos em Git.

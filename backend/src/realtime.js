@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { AppError, checkOrigin, id, publicError, text } from './http.js';
 import { receipt, storeMessage } from './repositories/chat.js';
 import { requireMatch } from './repositories/matching.js';
-import { sessionHash, sessionUser } from './services/sessions.js';
+import { activeSession, sessionHash, sessionUser } from './services/sessions.js';
 
 const userRoom = id => `user:${id}`;
 const chatRoom = id => `chat:${id}`;
@@ -20,13 +20,19 @@ export function realtime(server, db, ready) {
   });
   const online = id => Boolean(io.sockets.adapter.rooms.get(userRoom(id))?.size);
   const notify = (ids, event, data) => io.to(ids.map(userRoom)).emit(event, data);
-  const logout = hash => io.in(sessionRoom(hash)).disconnectSockets(true);
+  const logout = hash => {
+    const room = io.in(sessionRoom(hash));
+    room.emit('auth:expired');
+    room.disconnectSockets(true);
+  };
 
   io.use(async (socket, next) => {
     try {
       await ready();
       const hash = sessionHash(socket.request.headers.cookie);
-      socket.data.userId = await sessionUser(db, hash);
+      const { user_id, expires_at } = await activeSession(db, hash);
+      socket.data.userId = user_id;
+      socket.data.expiresAt = expires_at;
       socket.data.hash = hash;
       next();
     } catch (error) {
@@ -45,11 +51,14 @@ export function realtime(server, db, ready) {
   }
 
   io.on('connection', socket => {
-    const { userId, hash } = socket.data;
+    const { userId, hash, expiresAt } = socket.data;
     const wasOnline = online(userId);
     socket.join([userRoom(userId), sessionRoom(hash)]);
+    const expiration = setTimeout(() => logout(hash), Math.max(0, expiresAt - Date.now()));
+    expiration.unref();
     if (!wasOnline) presence(userId, true).catch(() => {});
     socket.on('disconnect', () => {
+      clearTimeout(expiration);
       if (!online(userId)) presence(userId, false).catch(() => {});
     });
 
@@ -63,7 +72,7 @@ export function realtime(server, db, ready) {
         } catch (error) {
           const { status, message } = publicError(error);
           ack({ ok: false, status, error: message });
-          if (status === 401) socket.disconnect(true);
+          if (status === 401) logout(hash);
         }
       });
     }

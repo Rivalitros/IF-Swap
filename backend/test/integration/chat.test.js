@@ -78,4 +78,8 @@ test('Socket.IO autoriza a dupla, deduplica, registra leitura e recupera histór
     [payload.content, 'Mensagem durante desconexão']);
   const { socket: returned } = await connect(t, newBase, bruno.cookie);
   assert.equal((await ack(returned, 'chat:join', { matchId })).data.online, false);
+  const ended = waitEvent(returned, 'auth:expired');
+  const loggedOut = await fetch(`${newBase}/api/auth/logout`, { method: 'POST', headers: { cookie: bruno.cookie } });
+  assert.equal(loggedOut.status, 204);
+  await ended;
 });

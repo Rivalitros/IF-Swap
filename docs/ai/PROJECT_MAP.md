@@ -1,22 +1,21 @@
 # Mapa do projeto
 
-- Login/cadastro, onboarding e sugestões ajustados em `frontend/src/`. A migração `002_normalize_demo_skills.sql` reconcilia chaves antigas.
+| Caminho | Papel |
+|---|---|
+| `README/` e `docs/revisao-academica.md` | Originais acadêmicos e comparação com o código |
+| `package.json` e `.env.example` | Workspaces, scripts e configuração da aplicação local |
+| `frontend/vite.config.js` | Proxy da API e WebSocket para o processo Express |
+| `frontend/src/App.jsx` e `Layout.jsx` | Sessão do React, roteador, navegação e avisos |
+| `frontend/src/pages/Auth.jsx` e `Profile.jsx` | Entrada, criação de conta e configuração do perfil |
+| `frontend/src/pages/Suggestions.jsx` | Cards, busca, reputação e perfil visível |
+| `frontend/src/pages/Chat.jsx` e `realtime.jsx` | Histórico de conversa, envio, presença, digitação, recibos e reconexão |
+| `frontend/src/pages/Agenda.jsx` e `Challenges.jsx` | Calendário, proposta, avaliação, mural e réplicas |
+| `backend/src/app.js` e `server.js` | Composição do servidor, middleware, migrações na inicialização e relógio da agenda |
+| `backend/src/realtime.js` | Socket.IO no servidor HTTP, autenticação e eventos |
+| `backend/src/routes/` | Rotas de contas, perfil, matching, chat, agenda, avaliação e mural |
+| `backend/src/repositories/` | Consultas, idempotência, agrupamento, autorização e transações |
+| `backend/src/services/` | Senhas, sessões e perfil |
+| `backend/database/` | Setup, migração, seeds e queries SQL de demonstração |
+| `backend/test/` | Regressões unitárias e testes com PostgreSQL e Socket.IO reais |
 
-- Avaliação em `backend/src/routes/reviews.js`, mural em `backend/src/routes/challenges.js` e `frontend/src/pages/Challenges.jsx`. A API calcula média e posição do perfil.
-
-- As regras de interesse mútuo, janela de tempo e conflitos estão em `backend/src/repositories/agenda.js`; o calendário em `frontend/src/pages/Agenda.jsx`.
-
-- O React usa `frontend/src/pages/Chat.jsx` e `frontend/src/realtime.jsx`. A API e o contrato estão em `backend/src/realtime.js` e `docs/api.md`.
-
-- `README/` é a fonte acadêmica e visual. `docs/revisao-academica.md` documenta rastreabilidade e limitações de compartilhamento. `docs/casos-de-uso.md` e `docs/roadmap.md` orientam a implementação.
-
-- A consulta PostgreSQL em `backend/src/repositories/matching.js` classifica compatibilidades. O frontend exibe perfis, avaliação e ações a partir dos dados da API.
-
-- Os contratos de conta e perfil estão em `docs/api.md`. O React inicia o onboarding em três etapas após cadastro e retoma do passo persistido.
-
-- O schema e o seed ficam em `backend/database/`. A API usa o pool em `backend/src/db.js`.
-
-- O frontend em `frontend/` usa o proxy Vite para a API em `backend/`. O arquivo `.env.example` documenta a configuração inicial.
-
-- `AGENTS.md` contém as regras de continuidade e versionamento.
-- `docs/ai/` mantém estado, decisões e pendências.
+O React usa `/api` por Fetch e troca eventos no mesmo servidor por Socket.IO. A API acessa o pool PostgreSQL em `backend/src/db.js`. Contratos em [API](../api.md) e dependências em [arquitetura](../arquitetura.md).

@@ -81,9 +81,10 @@ export function Challenges({ user }) {
   const list = useResource(url);
   const action = useAction();
   const paging = useAction();
-  const items = [...(list.data?.items || []), ...(extra?.items || [])].map(item => closed.has(item.id) ? { ...item, status: 'encerrado' } : item)
+  const page = extra?.path === url ? extra : null;
+  const items = [...(list.data?.items || []), ...(page?.items || [])].map(item => closed.has(item.id) ? { ...item, status: 'encerrado' } : item)
     .filter(item => !status || item.status === status);
-  const next = extra ? extra.next : list.data?.next;
+  const next = page ? page.next : list.data?.next;
 
   return <>
     <header className="page-heading"><h1>Mural de desafios</h1><p>Peça ajuda para aprender algo ou compartilhe o que você sabe.</p></header>
@@ -110,8 +111,8 @@ export function Challenges({ user }) {
       if (status === 'encerrado') list.refresh();
     }} />)}</div>
     {next && <button className="secondary more" disabled={paging.busy} onClick={() => paging.run(async () => {
-      const page = await api(url + 'before=' + next);
-      setExtra(current => ({ ...page, items: [...(current?.items || []), ...page.items] }));
+      const result = await api(url + 'before=' + next);
+      setExtra(current => ({ ...result, path: url, items: [...(current?.path === url ? current.items : []), ...result.items] }));
     })}>Carregar mais desafios</button>}
   </>;
 }
