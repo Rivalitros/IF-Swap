@@ -8,3 +8,10 @@ coverage/
 backend/uploads/
 *.sql.gz
 *.dump
+*.tmp
+*.bak
+*.backup
+backups/
+.codex/
+.npm-cache/
+.local-tools/
