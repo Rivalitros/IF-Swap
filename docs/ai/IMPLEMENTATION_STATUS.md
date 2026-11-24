@@ -1,5 +1,7 @@
 # Estado da implementação
 
+- Avaliações e mural · TESTADO na API; feedback mútuo, prazo e respostas encadeadas. Interfaces compiladas.
+
 - Agenda · TESTADO na API. Datas, participação, conflito concorrente, contraproposta e evento Socket.IO cobertos.
 
 - Chat · TESTADO na API e Socket.IO. Interface compilada. Persistência, deduplicação, acesso, presença e recibos cobertos.

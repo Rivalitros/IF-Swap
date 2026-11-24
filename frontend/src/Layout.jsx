@@ -1,5 +1,5 @@
 import { Link, NavLink, Outlet, useNavigate, useSearchParams } from 'react-router-dom';
-import { CalendarDays, Compass, LogOut, MessageSquare, Search, UserRound, X } from 'lucide-react';
+import { CalendarDays, Compass, LayoutGrid, LogOut, MessageSquare, Search, UserRound, X } from 'lucide-react';
 import { Avatar, Brand, Feedback } from './components.jsx';
 import { useLive } from './realtime.jsx';
 
@@ -7,6 +7,7 @@ const navigation = [
   ['/', 'Sugestões', Compass],
   ['/conversas', 'Conversas', MessageSquare],
   ['/agenda', 'Agenda', CalendarDays],
+  ['/mural', 'Mural', LayoutGrid],
   ['/perfil', 'Perfil', UserRound],
 ];
 

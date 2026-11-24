@@ -1,5 +1,13 @@
 # Handoff
 
+## Avaliações, reputação e mural
+
+Avaliação em `backend/src/routes/reviews.js`, mural em `backend/src/routes/challenges.js` e `frontend/src/pages/Challenges.jsx`. A API calcula média e posição do perfil.
+
+Verificação: Cinco testes integrados, dois unitários e build aprovados. Agenda 15758c4 enviada a origin/main.
+
+Próximo passo: IF-08 · Alta · Alinhar login, perfil e sugestões com o Figma e validar no navegador.
+
 ## Agenda recíproca e calendário
 
 As regras de interesse mútuo, janela de tempo e conflitos estão em `backend/src/repositories/agenda.js`; o calendário em `frontend/src/pages/Agenda.jsx`.

@@ -9,6 +9,8 @@ import { matchingRoutes } from './routes/matching.js';
 import { chatRoutes } from './routes/chat.js';
 import { agendaRoutes, announce } from './routes/agenda.js';
 import { completeEnded } from './repositories/agenda.js';
+import { reviewRoutes } from './routes/reviews.js';
+import { challengeRoutes } from './routes/challenges.js';
 import { realtime } from './realtime.js';
 import { requireSession } from './services/sessions.js';
 import { uploads } from './services/profile.js';
@@ -62,6 +64,8 @@ export function createApplication(db) {
   app.use('/api', matchingRoutes(db));
   app.use('/api', chatRoutes(db));
   app.use('/api/agenda', agendaRoutes(db, live));
+  app.use('/api', reviewRoutes(db));
+  app.use('/api/challenges', challengeRoutes(db));
   app.use('/api/photos', express.static(fileURLToPath(uploads), { index: false, redirect: false }));
   app.use('/api', (req, res) => res.status(404).json({ error: 'Recurso não encontrado.' }));
   app.use((error, req, res, next) => {

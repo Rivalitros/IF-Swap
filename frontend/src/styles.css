@@ -172,6 +172,18 @@ input[type=checkbox] { accent-color: var(--green); width: 1.05rem; height: 1.05r
 .status-pendente { background: var(--warning-bg); color: #714b15; }
 .status-cancelado { background: var(--disabled); color: var(--muted); }
 .agenda-notice { display: flex; justify-content: space-between; align-items: center; gap: .6rem; padding: .4rem .7rem; border-radius: 10px; background: var(--light); }
+
+.review-form,.reply-list { border-top: 1px solid var(--border); padding-top: .85rem; }
+.mural-list,.reply-list,.challenge { display: grid; gap: .85rem; }
+.mural-toolbar { align-items: end; margin-bottom: 1rem; }
+.mural-form { margin-bottom: 1rem; }
+.challenge :is(small,.challenge-date) { color: var(--muted); }
+.challenge-text,.reply p { white-space: pre-wrap; overflow-wrap: anywhere; }
+.challenge-date { display: flex; align-items: center; gap: .45rem; }
+.reply { margin-inline-start: calc(var(--depth) * clamp(.25rem,2vw,1rem)); border-inline-start: 2px solid var(--light); padding: .5rem 0 .5rem .7rem; }
+.reply header { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
+.text-button { padding: .22rem .35rem; min-height: 30px; background: transparent; color: var(--green); text-decoration: underline; }
+.more { margin-top: .8rem; }
 @media (max-width: 900px) {
   .agenda-grid { grid-template-columns: 1fr; }
 }

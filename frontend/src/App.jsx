@@ -8,6 +8,7 @@ import { Layout } from './Layout.jsx';
 import { PublicProfile, Suggestions } from './pages/Suggestions.jsx';
 import { Chat } from './pages/Chat.jsx';
 import { Agenda } from './pages/Agenda.jsx';
+import { Challenges } from './pages/Challenges.jsx';
 import { LiveProvider } from './realtime.jsx';
 
 export default function App() {
@@ -48,6 +49,7 @@ export default function App() {
       <Route path="/pessoas/:id" element={<PublicProfile />} />
       <Route path="/conversas/:id?" element={<Chat user={user} />} />
       <Route path="/agenda" element={<Agenda user={user} />} />
+      <Route path="/mural" element={<Challenges user={user} />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Route>
   </Routes></LiveProvider>;

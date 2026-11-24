@@ -60,6 +60,7 @@ export function PublicProfile() {
           <h3>Quer aprender</h3><Tags values={person.skills.learn.map(skill => skill.name)} empty="Nenhuma habilidade informada." />
         </section>
         <section className="card detail-section"><h2>Avaliações recebidas</h2>
+          {person.rank && <p className="muted">{person.rank}º lugar no ranking de reputação</p>}
           {person.reviews.length ? person.reviews.map(review => <div className="review" key={review.id}>
             <strong>{review.author}</strong> · {review.rating}/5 <small>{dateTime(review.created_at)}</small><p>{review.comment}</p>
           </div>) : <p className="muted">Ainda não há avaliações.</p>}

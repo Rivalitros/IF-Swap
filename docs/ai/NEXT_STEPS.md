@@ -1,5 +1,7 @@
 # Próximos passos
 
+- [ ] IF-08 · Alta · Alinhar login, perfil e sugestões com o Figma e validar no navegador.
+
 - [ ] IF-07 · Alta · Entregar avaliação mútua e mural com respostas encadeadas.
 
 - [ ] IF-06 · Alta · Implementar agenda recíproca e notificações de transição.

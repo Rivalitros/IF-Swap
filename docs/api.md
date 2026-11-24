@@ -56,3 +56,15 @@ O servidor emite `chat:message` com o objeto persistido, `chat:receipt` com `{ m
 | PATCH /agenda/:id | `{ action }`, com `accept`, `decline`, `cancel`, `start` ou `complete`. Para `change`, acrescente o novo intervalo, local, modalidade e `reason` opcional. |
 
 As propostas e aceitações exigem interesse mútuo. Só o outro participante responde à proposta ou apresenta contraproposta. O aceite reserva o intervalo nos dois calendários. Hora final exclusiva permite encontros contíguos. Um encontro confirmado ou em andamento é concluído pelo relógio do servidor após o fim. O evento `agenda:update` entrega `{ id, matchId, status }` aos participantes após persistência. A agenda recupera estados após reconexão.
+
+## Avaliações e mural
+
+| Método e caminho | Entrada e retorno |
+|---|---|
+| POST /agenda/:id/reviews | `{ "rating": 5, "comment": "Aprendi bastante." }`. Nota inteira de 1 a 5 e comentário opcional até 1000 caracteres. 201 uma vez por participante, após conclusão e fim do horário. |
+| GET /users/:id | Também contém `rank`, posição entre os perfis públicos avaliados, por média real e quantidade de notas. |
+| GET /challenges?status=&before= | Filtro opcional `aberto` ou `encerrado` e cursor opcional. Retorna `{items,next}` com até 30 desafios. |
+| POST /challenges | `{ "description": "Preciso praticar funções.", "deadline": "2026-12-10" }`. Prazo em ISO e a partir do dia atual do PostgreSQL. Retorno 201 com ID. |
+| GET /challenges/:id/replies | Retorna respostas ativas, com `parent_id` nulo para raízes. |
+| POST /challenges/:id/replies | `{ "message": "Posso enviar exercícios.", "parentId": 12 }`. Pai opcional e do mesmo desafio. |
+| PATCH /challenges/:id/close | Fecha desafio do solicitante. O prazo expirado ou encerramento impede novas respostas. |

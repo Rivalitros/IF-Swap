@@ -42,7 +42,12 @@ export async function publicProfile(db, viewer, target) {
   if (!user) throw new AppError(404, 'Perfil indisponível.');
   const { rows: reviews } = await db.query(`SELECT r.id, r.rating, r.comment, r.created_at, u.name AS author
     FROM reviews r JOIN users u ON u.id=r.author_id WHERE r.recipient_id=$1 ORDER BY r.id DESC LIMIT 50`, [target]);
-  return { ...user, skills: await skillsFor(db, target), reviews };
+  const ranking = await first(db, `WITH ranking AS (
+    SELECT u.id, dense_rank() OVER (ORDER BY avg(r.rating) DESC, count(*) DESC)::int AS rank
+    FROM reviews r JOIN users u ON u.id=r.recipient_id
+    WHERE u.is_public AND u.onboarding_step=4 GROUP BY u.id
+  ) SELECT rank FROM ranking WHERE id=$1`, [target]);
+  return { ...user, skills: await skillsFor(db, target), reviews, rank: ranking?.rank ?? null };
 }
 
 export async function ensureMatch(db, user, other) {
