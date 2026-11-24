@@ -31,6 +31,8 @@ React com Vite e React Router renderiza as telas. O navegador usa Fetch e Socket
 
 ## Instalação no VS Code
 
+Para a primeira instalação no Windows, siga o [passo a passo para rodar o IF Swap localmente](docs/como-rodar-localmente.md).
+
 1. Instale uma versão LTS do Node.js a partir da 22.12, com npm. Reabra o terminal e confira com `node --version` e `npm --version`. [Download oficial do Node.js](https://nodejs.org/en/download)
 2. Instale e inicie o serviço PostgreSQL no próprio computador. Tenha em mãos a porta, o usuário PostgreSQL e sua senha. No Windows, o instalador disponibiliza o servidor e o pgAdmin. [Instalação oficial do PostgreSQL no Windows](https://www.postgresql.org/download/windows/)
 3. Abra a raiz do repositório no VS Code. Para continuar em outro computador, clone o repositório e abra a pasta clonada.

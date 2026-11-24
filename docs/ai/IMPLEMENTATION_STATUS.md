@@ -2,6 +2,8 @@
 
 A fase 1 está funcional em ambiente local. **TESTADO** indica execução real. Os resultados por camada e os limites estão em [testes](../testes.md).
 
+O [guia de instalação no Windows](../como-rodar-localmente.md) cobre a primeira configuração, a inicialização diária e a verificação de saúde.
+
 | Área | Frontend | Backend e banco | Verificação e critério |
 |---|---|---|---|
 | Referências acadêmicas | TESTADO · 13 páginas Figma confrontadas com o React | TESTADO · DER, modelo, formulários, Canvas e divergências documentados | [Revisão](../revisao-academica.md). Originais identificáveis preservados localmente. |

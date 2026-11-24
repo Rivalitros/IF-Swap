@@ -8,6 +8,8 @@ A entrega fecha documentação de execução e testes, adiciona aviso de mensage
 
 ## Executar e conferir
 
+O [guia de instalação no Windows](../como-rodar-localmente.md) é o ponto de entrada para a primeira configuração e a verificação da API.
+
 1. Instale dependências com `npm ci` e copie `.env.example` para `.env`.
 2. Aponte o `.env` ao PostgreSQL local. Execute `npm run setup`, opcionalmente `npm run seed`, então `npm run dev`.
 3. Use `npm test`, `npm run test:integration` com `TEST_DATABASE_URL` e `npm run build`. Cenários e limitações estão em [testes](../testes.md).

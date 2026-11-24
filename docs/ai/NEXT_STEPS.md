@@ -1,5 +1,6 @@
 # Próximos passos
 
+- [x] Publicar o [passo a passo de instalação e execução no Windows](../como-rodar-localmente.md).
 - [x] **IF-04 · Alta · Revisar originais.** Fonte `README/`. Critério de leitura dos sete documentos e de inspeção visual do Figma. Resultado em `docs/revisao-academica.md`.
 - [x] **IF-05 · Alta · Finalizar chat.** Socket.IO, REST e React. Testes de autorização, reinício, deduplicação, presença, entrega e leitura.
 - [x] **IF-06 · Alta · Entregar agenda local.** Depende do matching e chat. Testes de reciprocidade, duas reservas concorrentes, contraproposta e tempo.

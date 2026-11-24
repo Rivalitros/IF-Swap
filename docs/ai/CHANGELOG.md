@@ -1,5 +1,7 @@
 # Changelog
 
+- Publicado o guia de instalação e execução do IF Swap no Windows, com configuração do PostgreSQL, contas demonstrativas e solução de problemas.
+
 ## 2026-11-24
 
 - Finalização da fase local. Aviso de mensagens fora da conversa, encerramento de sockets ao revogar sessão e documentação de operação, recuperação e backup. Testes no Edge, suíte PostgreSQL e build. API verificada durante parada e recuperação do banco.
