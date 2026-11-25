@@ -39,7 +39,7 @@ export async function fixture(t) {
       get cookie() { return cookie; },
       async send(path, method = 'GET', body) {
         const isJson = body !== undefined && !(body instanceof FormData);
-        const headers = {};
+        const headers = { Origin: currentBase };
         if (cookie) headers.cookie = cookie;
         if (isJson) headers['Content-Type'] = 'application/json';
         const response = await fetch(currentBase + '/api' + path, { method, headers, body: isJson ? JSON.stringify(body) : body });

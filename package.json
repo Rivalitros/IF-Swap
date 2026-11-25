@@ -10,7 +10,7 @@
     "seed": "npm run seed -w backend",
     "build": "npm run build -w frontend",
     "test": "npm test -w backend",
-    "test:integration": "npm run test:integration -w backend"
+    "test:integration": "npm run test:integration -w backend && npm run test:integration -w frontend"
   },
   "devDependencies": { "concurrently": "^9.2.0" }
 }

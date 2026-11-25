@@ -2,7 +2,7 @@
 
 ## Execução
 
-Em um PostgreSQL local, crie um banco exclusivo para testes cujo nome termine em `_test`. Configure o `TEST_DATABASE_URL` em `.env` usando a conta local e esse banco. Cada teste integrado cria seu próprio schema, aplica migrações e remove apenas o schema que criou. O serviço local precisa estar iniciado. O seed é desnecessário para os testes automatizados.
+Em um PostgreSQL local, crie um banco exclusivo para testes cujo nome termine em `_test`. Com o usuário e a porta padrão, execute `createdb -h 127.0.0.1 -p 5432 -U postgres -W if_swap_test` ou crie o banco pelo pgAdmin. No `.env`, use `TEST_DATABASE_URL=postgresql://postgres@127.0.0.1:5432/if_swap_test` para reutilizar `PGPASSWORD`. Se a conta de testes tiver outra senha, inclua-a na URL com os caracteres reservados codificados. Cada teste integrado cria seu próprio schema, aplica migrações e remove apenas o schema que criou. O serviço local precisa estar iniciado. O seed é desnecessário para os testes automatizados.
 
 ```powershell
 npm ci
@@ -22,8 +22,15 @@ npm run build
 | `integration/agenda.test.js` | Reciprocidade, participação, contraproposta, aceites concorrentes, evento Socket.IO, conclusão e cancelamento. |
 | `integration/community.test.js` | Avaliação antes e depois do encontro, reputação, posição, prazo, resposta, réplica e encerramento de desafio. |
 | `integration/migrations.test.js` | Migração de habilidades demonstrativas preserva vínculos e deduplica associações. |
+| `frontend/test/proxy.test.js` | Vite encaminha login e sessão, conexão WebSocket com cabeçalho de origem, mensagem, reconexão com leitura do histórico e aceite da agenda. |
 
-## Verificação desta versão
+## Retomada no Windows
+
+- Node.js 26.13.0 e npm 12.2.2. Instalação, dois testes unitários e build concluídos.
+- PostgreSQL 19 isolado em loopback na porta 55432. Dois setups, migrações 001 e 002, dois seeds e sete testes integrados aprovados. A instância padrão da máquina em 5432 exigiu a senha de `postgres`.
+- A regressão do proxy usou duas sessões na mesma máquina para verificar REST e Socket.IO via Vite. A verificação em dois dispositivos físicos permanece aberta. [Roteiro LAN](como-rodar-localmente.md#teste-em-dois-dispositivos).
+
+## Verificações da fase 1
 
 - Dois testes unitários e seis integrados executados com sucesso. Usado PostgreSQL local isolado com dados fictícios.
 - Instalação das dependências, setup e seed repetidos e build Vite concluído.

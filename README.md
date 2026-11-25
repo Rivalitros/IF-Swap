@@ -72,7 +72,7 @@ A senha fictícia das quatro contas é `TrocaLocal123!`. Ana e Bruno já têm co
 
 ### Outra máquina na rede local
 
-Com o firewall e as regras da rede permitindo, defina `WEB_HOST=0.0.0.0` em `.env`, reinicie o Vite e acesse `http://IP-DO-COMPUTADOR:5173` no outro dispositivo. Mantenha o backend e o PostgreSQL em loopback. O Vite encaminha API e Socket.IO pelo mesmo endereço usado pelo navegador.
+Em uma rede autorizada, configure `WEB_HOST` com o IPv4 da interface escolhida. Mantenha a API em loopback e restrinja o acesso direto ao PostgreSQL. O Vite encaminha a API e o Socket.IO pelo mesmo endereço usado pelo navegador. [Configuração e verificação da LAN](docs/como-rodar-localmente.md#teste-em-dois-dispositivos).
 
 ## Testes
 

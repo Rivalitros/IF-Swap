@@ -2,6 +2,8 @@
 
 O IF Swap usa dois processos locais. O navegador abre o React pelo servidor do Vite. Esse servidor aplica o proxy para rotas `/api` e `/socket.io` no Express. O Vite usa `WEB_PORT` e repassa as requisições para `PORT` em loopback. O Node.js é o único processo da aplicação que abre conexões com o PostgreSQL.
 
+No modo LAN, `WEB_HOST` define a interface em que o Vite atende o navegador. O proxy conserva o host usado pelo navegador para a checagem de origem no Express e no Socket.IO. `PGHOST` indica o destino da conexão da API. Os endereços de escuta do PostgreSQL são definidos pelo próprio servidor do banco. [Roteiro LAN](como-rodar-localmente.md#teste-em-dois-dispositivos).
+
 | Camada | Responsabilidade |
 |---|---|
 | `frontend/src/App.jsx` e `Layout.jsx` | Sessão, roteamento, navegação responsiva e avisos |

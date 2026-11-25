@@ -17,5 +17,6 @@
 | `backend/src/services/` | Senhas, sessões e perfil |
 | `backend/database/` | Setup, migração, seeds e queries SQL de demonstração |
 | `backend/test/` | Regressões unitárias e testes com PostgreSQL e Socket.IO reais |
+| `frontend/test/proxy.test.js` | Teste integrado de REST e Socket.IO pelo proxy real do Vite |
 
 O React usa `/api` por Fetch e troca eventos no mesmo servidor por Socket.IO. A API acessa o pool PostgreSQL em `backend/src/db.js`. Contratos em [API](../api.md) e dependências em [arquitetura](../arquitetura.md).
