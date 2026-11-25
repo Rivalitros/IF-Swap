@@ -11,6 +11,6 @@
 - [x] Preparar `if_swap` e `if_swap_test` na instância local de 5432 e executar a suíte integrada.
 - [x] Corrigir o cartão de conversas recentes e adicionar controle de visibilidade da senha no login. Validar esses fluxos e o cadastro no Edge.
 - [x] Documentar endereços, portas, firewall e diagnóstico de acesso entre dispositivos no [README](../../README.md#acesso-na-rede-local).
-- [ ] **IF-10 · Alta · Exercitar o modo LAN em dois dispositivos físicos.** Depende de rede autorizada e de `WEB_HOST` apontando para a interface de teste. Confirme o isolamento da API e do PostgreSQL pelo segundo dispositivo. Aceitação inclui login de ambas as contas, troca em tempo real, reconexão, aceite de agenda e confirmação nos dois calendários. [Roteiro LAN](../como-rodar-localmente.md#teste-em-dois-dispositivos).
+- [x] **IF-10 · Alta · Exercitar o modo LAN em dois dispositivos físicos.** Validação confirmada pelo usuário na rede de teste. [Resultado](../testes.md#validação-da-rede-local) · [Roteiro LAN](../como-rodar-localmente.md#teste-em-dois-dispositivos).
 - [ ] **IF-11 · Alta · Validar acessibilidade e uso escolar.** Depende de aquisição de feedback e testes de teclado, leitor de tela e larguras adicionais. Registre os resultados em `docs/testes.md` e corrija problemas reproduzíveis.
 - [ ] **IF-12 · Média · Definir regras de moderação.** Proposta em Canvas e pesquisa. Dependências incluem definição de papéis, consentimento e fluxos. Critério de conclusão é plano revisado antes da implementação. Acompanhe em `docs/roadmap.md`.

@@ -20,6 +20,6 @@ Na retomada no Windows, a instalação, o build, dois testes unitários e sete i
 
 O login ganhou um botão para mostrar e ocultar a senha. Em **Conversas → Recentes**, prévias longas exibem reticências dentro do cartão. Os ajustes e o cadastro foram validados no Edge com dados fictícios. [Testes](../testes.md#login-e-conversas-recentes).
 
-O envio ao GitHub transfere código e documentação. Para dados de usuários, use [backup privado](../banco-de-dados.md#backup-e-restauração-privados). Visibilidade do remoto depende de consulta autenticada ao GitHub. A validação local usou dois contextos no mesmo navegador, e o teste entre dispositivos físicos permanece aberto.
+O envio ao GitHub transfere código e documentação. Para dados de usuários, use [backup privado](../banco-de-dados.md#backup-e-restauração-privados). Visibilidade do remoto depende de consulta autenticada ao GitHub.
 
-O README principal documenta a configuração da LAN no Windows, a regra no firewall ativo e o diagnóstico de tempo limite. O acesso pelo celular foi confirmado pelo usuário. A próxima etapa de **IF-10** é completar o roteiro de chat, reconexão e agenda em dois dispositivos físicos, com verificação das portas internas. [Acesso na rede local](../../README.md#acesso-na-rede-local) · [Próximos passos](NEXT_STEPS.md).
+O usuário confirmou a conclusão da **IF-10** em dois dispositivos físicos. A próxima tarefa de refinamento é **IF-11**, que cobre acessibilidade e uso escolar. [Resultado da IF-10](../testes.md#validação-da-rede-local) · [Próximos passos](NEXT_STEPS.md).
