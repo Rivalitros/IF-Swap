@@ -4,6 +4,8 @@
 
 ## 2026-11-24
 
+- Avaliação acessível pelas estrelas nas sugestões e no perfil. Perfil e Agenda usam estrelas clicáveis e comentário opcional para encontros concluídos.
+
 - IF-10 concluída após confirmação do usuário sobre a validação em dois dispositivos físicos na rede local.
 
 - Documentado no README como acessar o IF Swap pela rede local, configurar portas no Windows e no Avast e diagnosticar falhas de conexão.

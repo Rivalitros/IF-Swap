@@ -10,7 +10,7 @@ O projeto atende estudantes, docentes e funcionários. Seus objetivos são facil
 - Buscar perfis compatíveis, identificar as duas direções da troca, consultar avaliações e iniciar uma conversa.
 - Conversar em tempo real com histórico, presença, digitação e estados de entrega e leitura.
 - Propor um encontro entre perfis com interesse mútuo, apresentar contraproposta e consultar os compromissos no calendário.
-- Avaliar o par após o fim de um encontro concluído e consultar a reputação no perfil.
+- Avaliar o par com estrelas e comentário opcional após um encontro concluído. Abra a avaliação pelas estrelas em Sugestões, pelo perfil ou pela Agenda.
 - Publicar desafios, responder, replicar respostas e acompanhar o prazo.
 
 As telas de entrada, configuração e sugestões usam a referência Figma do grupo. A navegação fica na lateral em desktop e no rodapé em telas pequenas. Consulte o [guia do usuário](docs/guia-do-usuario.md).

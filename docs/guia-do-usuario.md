@@ -16,7 +16,9 @@ Em **Sugestões**, use a busca por nome, setor ou habilidade. As tags preenchida
 
 ## Agendar e avaliar
 
-Em **Agenda**, escolha **Propor encontro** ou use **Agendar** no chat. Marque início, fim, modalidade e local. A proposta depende de uma troca recíproca. O outro participante pode aceitar, recusar ou solicitar alteração com novos dados. O calendário marca as datas com encontros e permite filtrar por dia. Depois do fim de um encontro confirmado, **Avaliar troca** permite enviar uma nota e um comentário opcional.
+Em **Agenda**, escolha **Propor encontro** ou use **Agendar** no chat. Marque início, fim, modalidade e local. A proposta depende de uma troca recíproca. O outro participante pode aceitar, recusar ou solicitar alteração com novos dados. O calendário marca as datas com encontros e permite filtrar por dia.
+
+Depois que o encontro terminar, clique nas estrelas da pessoa em **Sugestões** ou no perfil. Você também pode escolher **Avaliar troca** no perfil ou no cartão de encontro concluído da **Agenda**. Se houver mais de um encontro disponível, selecione qual deseja avaliar. Escolha de uma a cinco estrelas, escreva um comentário se quiser e clique em **Enviar avaliação**. Cada participante pode avaliar uma vez por encontro. A avaliação e o comentário aparecem no perfil da pessoa avaliada.
 
 ## Publicar no mural
 

@@ -1,4 +1,5 @@
 import { useEffect, useId, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Star } from 'lucide-react';
 import { api } from './api.js';
 
@@ -66,11 +67,14 @@ export function AffiliationField({ value = 'aluno' }) {
   </select>}</Field>;
 }
 
-export function Rating({ person }) {
+export function Rating({ person, reviewTo }) {
   const rating = Number(person.reputation);
-  return <span className="rating"><span className="stars" aria-hidden="true">
+  const stars = <span className="stars" aria-hidden="true">
     {[1, 2, 3, 4, 5].map(value => <Star size={16} strokeWidth={1} key={value} className={value <= Math.round(rating) ? 'filled' : ''} />)}
-  </span>
+  </span>;
+  return <span className="rating">
+    {reviewTo ? <Link className="rating-link" to={reviewTo} title="Avaliar troca"
+      aria-label={`Avaliar troca com ${person.name}`}>{stars}</Link> : stars}
     {person.review_count ? <><strong aria-label={`Nota ${rating} de 5`}>{rating.toLocaleString('pt-BR', { minimumFractionDigits: 1 })}</strong>
       <span>({person.review_count} <span className="rating-word">{person.review_count === 1 ? 'avaliação' : 'avaliações'}</span>)</span></> : 'Sem avaliações'}
   </span>;

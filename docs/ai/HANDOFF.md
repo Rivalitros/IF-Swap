@@ -20,6 +20,8 @@ Na retomada no Windows, a instalação, o build, dois testes unitários e sete i
 
 O login ganhou um botão para mostrar e ocultar a senha. Em **Conversas → Recentes**, prévias longas exibem reticências dentro do cartão. Os ajustes e o cadastro foram validados no Edge com dados fictícios. [Testes](../testes.md#login-e-conversas-recentes).
 
+As estrelas das sugestões e do perfil abrem o formulário de avaliação. O perfil lista os encontros concluídos com a pessoa e oferece a escolha do encontro quando há mais de um disponível. A Agenda usa o mesmo formulário de nota e comentário. [Testes](../testes.md#avaliação-por-estrelas).
+
 O envio ao GitHub transfere código e documentação. Para dados de usuários, use [backup privado](../banco-de-dados.md#backup-e-restauração-privados). Visibilidade do remoto depende de consulta autenticada ao GitHub.
 
 O usuário confirmou a conclusão da **IF-10** em dois dispositivos físicos. A próxima tarefa de refinamento é **IF-11**, que cobre acessibilidade e uso escolar. [Resultado da IF-10](../testes.md#validação-da-rede-local) · [Próximos passos](NEXT_STEPS.md).

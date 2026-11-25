@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { api } from '../api.js';
 import { dateTime, Feedback, Field, useAction, useResource } from '../components.jsx';
 import { useLive } from '../realtime.jsx';
+import { canReview, ReviewForm } from '../ReviewForm.jsx';
 
 export const appointmentStates = {
   pendente: 'Pendente', confirmado: 'Confirmado', em_andamento: 'Em andamento', concluido: 'Concluído', cancelado: 'Cancelado',
@@ -103,30 +104,19 @@ function Appointment({ item, user, refresh }) {
       {['confirmado', 'em_andamento'].includes(item.status) && ends <= time && transition('complete', 'Concluir encontro')}
     </div>}
     {change && <ScheduleForm existing={item} onClose={() => setChange(false)} onSave={() => { setChange(false); refresh(); }} />}
-    {item.status === 'concluido' && ends <= time && (item.reviewed
-      ? <p className="muted">Avaliação enviada.</p> : <ReviewForm item={item} refresh={refresh} />)}
+    {(item.reviewed || canReview(item)) && <AppointmentReview item={item} refresh={refresh} />}
   </article>;
 }
 
-function ReviewForm({ item, refresh }) {
+function AppointmentReview({ item, refresh }) {
   const [open, setOpen] = useState(false);
-  const action = useAction();
+  const [sent, setSent] = useState(false);
+  if (item.reviewed || sent) return <p className="muted" role="status">Avaliação enviada.</p>;
   if (!open) return <button className="secondary" onClick={() => setOpen(true)}>Avaliar troca</button>;
-  return <form className="form-stack review-form" onSubmit={event => {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    action.run(async () => {
-      await api(`/agenda/${item.id}/reviews`, { method: 'POST', body: { rating: Number(form.get('rating')), comment: form.get('comment') } });
-      refresh();
-    });
-  }}>
-    <Field label="Nota">{id => <select id={id} name="rating" required defaultValue=""><option value="">Selecione de 1 a 5</option>
-      {[5, 4, 3, 2, 1].map(value => <option key={value} value={value}>{value} {value === 1 ? 'estrela' : 'estrelas'}</option>)}</select>}</Field>
-    <Field label="Comentário (opcional)">{id => <textarea id={id} name="comment" maxLength={1000} />}</Field>
-    <Feedback error={action.error} />
-    <div className="actions"><button type="button" className="secondary" onClick={() => setOpen(false)}>Voltar</button>
-      <button className="primary" disabled={action.busy}>Enviar avaliação</button></div>
-  </form>;
+  return <ReviewForm appointments={[item]} onCancel={() => setOpen(false)} onSaved={() => {
+    setSent(true);
+    refresh();
+  }} />;
 }
 
 export function Agenda({ user }) {

@@ -41,6 +41,13 @@ npm run build
 - Uma mensagem de 2.000 caracteres sem espaços foi enviada via Socket.IO. Em 320, 390, 701 e 1.440 pixels, a prévia exibiu reticências e manteve o contador de não lidas dentro do cartão. O texto completo foi conferido ao abrir a conversa.
 - Dois testes unitários, sete integrados e build concluídos.
 
+## Avaliação por estrelas
+
+- No Edge, em 320 e 1.440 pixels, as estrelas das sugestões abriram a avaliação no perfil e a Agenda permitiu avaliar pelo cartão do encontro.
+- O perfil listou somente os encontros concluídos e ainda disponíveis com a pessoa selecionada. Com mais de um encontro, foi possível escolher qual avaliar.
+- A seleção funcionou por clique e teclado. O envio com comentário multilinha atualizou a média e exibiu o comentário no perfil. O envio sem comentário e a rejeição de uma avaliação duplicada foram verificados.
+- Dois testes unitários, sete integrados e build concluídos.
+
 ## Verificações da fase 1
 
 - Dois testes unitários e seis integrados executados com sucesso. Usado PostgreSQL local isolado com dados fictícios.

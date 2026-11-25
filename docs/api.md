@@ -61,6 +61,8 @@ As propostas e aceitações exigem interesse mútuo. Só o outro participante re
 
 ## Avaliações e mural
 
+No perfil, o formulário usa `GET /agenda` para localizar encontros concluídos com a pessoa, cujo horário terminou e cujo indicador `reviewed` é falso. A Agenda e o perfil enviam a avaliação pelo mesmo endpoint.
+
 | Método e caminho | Entrada e retorno |
 |---|---|
 | POST /agenda/:id/reviews | `{ "rating": 5, "comment": "Aprendi bastante." }`. Nota inteira de 1 a 5 e comentário opcional até 1000 caracteres. 201 uma vez por participante, após conclusão e fim do horário. |
