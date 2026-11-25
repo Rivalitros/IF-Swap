@@ -87,11 +87,10 @@ Confira se o serviço PostgreSQL está iniciado, abra a pasta do projeto e execu
 
 ## Teste em dois dispositivos
 
-1. Use uma rede autorizada e contas fictícias. Confira no computador servidor os endereços de escuta da API e do PostgreSQL. A API deve usar `HOST=127.0.0.1`. O PostgreSQL deve escutar em loopback ou ter a porta do banco bloqueada para os outros dispositivos pelo firewall. `PGHOST` no `.env` só controla a conexão de saída da API.
-2. Use `ipconfig` para identificar o IPv4 da interface da rede de teste. Coloque esse endereço em `WEB_HOST` no `.env` e reinicie `npm.cmd run dev`. Permita no firewall apenas `WEB_PORT` (5173 por padrão) para os clientes da rede de teste.
-3. Abra `http://IP-DO-SERVIDOR:5173` nos dois dispositivos e confirme que `/api/health` responde com 200. Do segundo dispositivo, confirme que as portas diretas da API e do PostgreSQL (3001 e 5432 por padrão) não aceitam conexões. Em outro Windows, use `Test-NetConnection IP-DO-SERVIDOR -Port 5432` e repita com a porta da API. O resultado esperado é `TcpTestSucceeded : False` nas duas.
-4. Entre como Ana em um dispositivo e Bruno no outro. Envie uma mensagem e confira o recebimento e a leitura. Desconecte o segundo dispositivo da rede, envie outra mensagem e confira o histórico quando ele voltar. Proponha um encontro na agenda, aceite no outro dispositivo e confira a confirmação nos dois calendários.
-5. Registre o resultado em [testes](testes.md) e volte `WEB_HOST` para `127.0.0.1` ao terminar.
+1. Configure `WEB_HOST`, libere a porta da aplicação no firewall ativo e confirme pelo segundo dispositivo que as portas da API e do PostgreSQL estão restritas. [Acesso na rede local](../README.md#acesso-na-rede-local).
+2. Entre como Ana em um dispositivo e Bruno no outro. Envie uma mensagem e confira o recebimento e a leitura. Desconecte o segundo dispositivo da rede, envie outra mensagem e confira o histórico quando ele voltar.
+3. Proponha um encontro na agenda, aceite no outro dispositivo e confira a confirmação nos dois calendários.
+4. Registre o resultado em [testes](testes.md), volte `WEB_HOST` para `127.0.0.1` e desative a regra de teste ao terminar.
 
 ## Se algo der errado
 

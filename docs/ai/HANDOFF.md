@@ -22,4 +22,4 @@ O login ganhou um botão para mostrar e ocultar a senha. Em **Conversas → Rece
 
 O envio ao GitHub transfere código e documentação. Para dados de usuários, use [backup privado](../banco-de-dados.md#backup-e-restauração-privados). Visibilidade do remoto depende de consulta autenticada ao GitHub. A validação local usou dois contextos no mesmo navegador, e o teste entre dispositivos físicos permanece aberto.
 
-A próxima etapa de **IF-10** é executar o roteiro em dois dispositivos físicos. Nesta máquina a instância 5432 escutava em todas as interfaces. Confirme o isolamento da porta antes de habilitar o modo LAN. [Próximos passos](NEXT_STEPS.md) · [Roteiro LAN](../como-rodar-localmente.md#teste-em-dois-dispositivos).
+O README principal documenta a configuração da LAN no Windows, a regra no firewall ativo e o diagnóstico de tempo limite. O acesso pelo celular foi confirmado pelo usuário. A próxima etapa de **IF-10** é completar o roteiro de chat, reconexão e agenda em dois dispositivos físicos, com verificação das portas internas. [Acesso na rede local](../../README.md#acesso-na-rede-local) · [Próximos passos](NEXT_STEPS.md).

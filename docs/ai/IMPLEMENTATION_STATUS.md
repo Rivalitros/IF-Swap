@@ -14,5 +14,5 @@ O [guia de instalação no Windows](../como-rodar-localmente.md) cobre a primeir
 | Agenda | TESTADO · proposta e aceite entre sessões | TESTADO · `/api/agenda`, aviso Socket.IO, tabela `appointments` | Reciprocidade, concorrência, alterações, conclusão, cancelamento e recuperação do estado. |
 | Avaliações | TESTADO · envio na agenda móvel e comentário no perfil | TESTADO · `POST /api/agenda/:id/reviews`, tabela `reviews` | API valida avaliações mútuas, unicidade, prazo, média e ranking. |
 | Mural | TESTADO · publicação e resposta na UI | TESTADO · `/api/challenges` e subrotas. `challenges` e `challenge_replies` | Teste cobre filtro, prazo, autorização, resposta pai e encerramento. |
-| Documentação e Git | TESTADO · revisão de novos fluxos | TESTADO · checkpoints enfileirados na branch principal com push | Confirmar head remoto com `git ls-remote origin refs/heads/main`. |
+| Documentação e Git | TESTADO · revisão de novos fluxos e guia de acesso pela LAN no README | TESTADO · checkpoints publicados na branch principal | Confirmar head remoto com `git ls-remote origin refs/heads/main`. |
 | Infraestrutura, moderação e expansão | NÃO INICIADO | NÃO INICIADO | Fases posteriores, conforme [roadmap](../roadmap.md). |

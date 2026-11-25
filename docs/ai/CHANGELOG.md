@@ -4,6 +4,8 @@
 
 ## 2026-11-24
 
+- Documentado no README como acessar o IF Swap pela rede local, configurar portas no Windows e no Avast e diagnosticar falhas de conexão.
+
 - Prévia longa em Recentes mantida dentro do cartão e botão de mostrar e ocultar senha no login. Cadastro, login e prévia conferidos no Edge.
 
 - Setup concluído na instância PostgreSQL de 5432. Migrações 001 e 002 conferidas em `if_swap` e sete testes integrados aprovados em `if_swap_test`.

@@ -33,6 +33,8 @@ React com Vite e React Router renderiza as telas. O navegador usa Fetch e Socket
 
 Para a primeira instalação no Windows, siga o [passo a passo para rodar o IF Swap localmente](docs/como-rodar-localmente.md).
 
+Se o IF Swap já roda em um computador e você quer acessá-lo de outro dispositivo, siga a seção [Acesso na rede local](#acesso-na-rede-local).
+
 1. Instale uma versão LTS do Node.js a partir da 22.12, com npm. Reabra o terminal e confira com `node --version` e `npm --version`. [Download oficial do Node.js](https://nodejs.org/en/download)
 2. Instale e inicie o serviço PostgreSQL no próprio computador. Tenha em mãos a porta, o usuário PostgreSQL e sua senha. No Windows, o instalador disponibiliza o servidor e o pgAdmin. [Instalação oficial do PostgreSQL no Windows](https://www.postgresql.org/download/windows/)
 3. Abra a raiz do repositório no VS Code. Para continuar em outro computador, clone o repositório e abra a pasta clonada.
@@ -40,15 +42,15 @@ Para a primeira instalação no Windows, siga o [passo a passo para rodar o IF S
 ```powershell
 git clone https://github.com/Rivalitros/IF-Swap.git
 cd IF-Swap
-npm ci
-Copy-Item .env.example .env
+npm.cmd ci
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 ```
 
-Se a pasta já estiver aberta, comece em `npm ci`. Em Linux ou macOS, use `cp .env.example .env`. No `.env`, mantenha `PGHOST=127.0.0.1`, ajuste `PGPORT`, `PGUSER` e `PGPASSWORD` para a instância local e escolha `PGDATABASE`, cujo padrão é `if_swap`.
+Se já tiver o projeto, abra a pasta do repositório e comece em `npm.cmd ci`. Em Linux ou macOS, execute `npm` e, ao criar o arquivo pela primeira vez, use `cp .env.example .env`. No `.env`, mantenha `PGHOST=127.0.0.1`, ajuste `PGPORT`, `PGUSER` e `PGPASSWORD` para a instância local e escolha `PGDATABASE`, cujo padrão é `if_swap`. Guarde a senha apenas no `.env` local.
 
 ```powershell
-npm run setup
-npm run dev
+npm.cmd run setup
+npm.cmd run dev
 ```
 
 Acesse **http://127.0.0.1:5173**. A API ouve em `127.0.0.1:3001` por padrão. Para rodar em terminais separados, use `npm run dev:api` e `npm run dev:web`. `npm run build` gera os arquivos estáticos em `frontend/dist/`; o fluxo documentado para usar a aplicação completa localmente é `npm run dev`.
@@ -58,7 +60,7 @@ O setup cria o banco se o usuário PostgreSQL tiver permissão. Quando não tive
 ### Demonstração fictícia
 
 ```powershell
-npm run seed
+npm.cmd run seed
 ```
 
 | Conta | Ensina | Quer aprender |
@@ -70,9 +72,72 @@ npm run seed
 
 A senha fictícia das quatro contas é `TrocaLocal123!`. Ana e Bruno já têm conversa, encontro concluído e avaliação de exemplo. Há também um desafio com resposta. O seed fica separado das migrações e pode ser repetido sem duplicar esses registros.
 
-### Outra máquina na rede local
+### Acesso na rede local
 
-Em uma rede autorizada, configure `WEB_HOST` com o IPv4 da interface escolhida. Mantenha a API em loopback e restrinja o acesso direto ao PostgreSQL. O Vite encaminha a API e o Socket.IO pelo mesmo endereço usado pelo navegador. [Configuração e verificação da LAN](docs/como-rodar-localmente.md#teste-em-dois-dispositivos).
+Escolha o **PC servidor** para rodar o IF Swap e o PostgreSQL. O outro PC ou celular precisa apenas de um navegador e acesso à mesma rede local autorizada. Use contas fictícias no teste em rede.
+
+| Porta TCP padrão | Serviço | Acesso |
+|---|---|---|
+| `5173` | Vite, definido por `WEB_PORT` | Libere para os dispositivos da rede de teste. O Vite encaminha REST e Socket.IO pelo mesmo endereço. |
+| `3001` | API Express, definida por `PORT` | Mantenha em `HOST=127.0.0.1`. |
+| `5432` | PostgreSQL, acessado pela API via `PGPORT` | Restrinja à própria máquina. |
+
+#### Configure o PC servidor
+
+1. Execute `ipconfig` e localize o **Endereço IPv4** do adaptador **Wi-Fi** ou **Ethernet** conectado à rede de teste. Use esse endereço no lugar de `192.168.1.10` nos exemplos.
+2. Edite as entradas existentes no `.env` da raiz do projeto, com uma linha por variável. Use a porta da sua instância PostgreSQL em `PGPORT`.
+
+   ```dotenv
+   WEB_HOST=192.168.1.10
+   WEB_PORT=5173
+   HOST=127.0.0.1
+   PORT=3001
+   PGHOST=127.0.0.1
+   PGPORT=5432
+   ```
+
+3. Restrinja o PostgreSQL à própria máquina. `PGHOST` define para onde a API se conecta. Para conferir onde o servidor PostgreSQL escuta, execute `SHOW listen_addresses;` no pgAdmin. Se a instância for dedicada ao uso local, localize o arquivo com `SHOW config_file;`, defina `listen_addresses = 'localhost'` no `postgresql.conf` e reinicie o serviço PostgreSQL no Windows. Em uma instância compartilhada, peça ao administrador para restringir o acesso à porta do banco para os dispositivos da rede de teste. [Parâmetros de conexão do PostgreSQL](https://www.postgresql.org/docs/current/runtime-config-connection.html).
+4. Se o banco estiver sendo preparado pela primeira vez, execute `npm.cmd run setup`. Depois, inicie ou reinicie `npm.cmd run dev` e mantenha o terminal aberto. No PC servidor, teste `http://192.168.1.10:5173/api/health`. A resposta esperada é `{"status":"ok","database":"online"}`.
+
+#### Libere a porta no firewall ativo
+
+No PC servidor, execute `netsh advfirewall show global categories` e confira qual produto aparece em `FirewallRuleCategory`. Configure a entrada TCP somente para a porta `WEB_PORT` e para os endereços dos clientes ou da sub-rede de teste.
+
+**Firewall do Windows.** Abra o PowerShell como administrador. Execute `Get-NetConnectionProfile` para conferir o nome do adaptador e o perfil, e ajuste os valores do comando. O exemplo usa `Wi-Fi` no perfil `Private`, IPv4 `192.168.1.10` e sub-rede `192.168.1.0/24`, correspondente à máscara `255.255.255.0`. Se preferir liberar um único cliente, use o IPv4 dele em `-RemoteAddress`. [Referência do comando](https://learn.microsoft.com/pt-br/powershell/module/netsecurity/new-netfirewallrule).
+
+```powershell
+New-NetFirewallRule -Name 'IFSwap-LAN' -DisplayName 'IF Swap na LAN' `
+  -Direction Inbound -Action Allow -Protocol TCP -LocalPort 5173 `
+  -InterfaceAlias 'Wi-Fi' -Profile Private `
+  -LocalAddress '192.168.1.10' -RemoteAddress '192.168.1.0/24'
+```
+
+**Avast Antivirus.** Abra **Proteção → Firewall → Configurações → Exibir regras do Firewall → Regras de rede → Mais → Adicionar nova regra**. Use **Permitir**, **Entrada** e **TCP**. Selecione o perfil usado nessa rede, informe `5173` em **Porta local** e o IPv4 do cliente ou o intervalo da rede em **Endereço**, como `192.168.1.1-192.168.1.254`. Deixe **Porta remota** em branco ou use `1-65535` se a interface exigir, pois o navegador escolhe a porta de origem. Ative a regra e verifique sua prioridade se houver uma regra de bloqueio aplicável. [Guia oficial do Avast](https://support.avast.com/pt-br/article/28/).
+
+#### Teste no outro PC ou celular
+
+1. Conecte o dispositivo à mesma rede e abra `http://192.168.1.10:5173` no navegador. Use o IPv4 do **servidor** e a porta `WEB_PORT`.
+2. Abra `/api/health` no mesmo endereço para conferir a API e o banco. Em outro Windows, use os comandos abaixo. `TcpTestSucceeded` deve ser **True** na porta da aplicação e **False** nas duas portas internas. Ajuste os números se sua configuração usar portas diferentes.
+
+   ```powershell
+   Test-NetConnection 192.168.1.10 -Port 5173
+   Test-NetConnection 192.168.1.10 -Port 3001
+   Test-NetConnection 192.168.1.10 -Port 5432
+   ```
+
+3. Com as contas demonstrativas, entre como Ana em um dispositivo e Bruno no outro. Envie uma mensagem e confirme o recebimento. Para verificar também reconexão e agenda, siga o roteiro de dois dispositivos. [Roteiro de verificação](docs/como-rodar-localmente.md#teste-em-dois-dispositivos).
+
+#### Resolva erros de acesso em rede
+
+| Sintoma | O que verificar |
+|---|---|
+| `ERR_CONNECTION_TIMED_OUT` em todos os clientes | Teste primeiro `/api/health` no servidor pelo IPv4 da LAN. Confira se o IPv4 ainda é o mesmo, se o firewall ativo permite a porta e se a rede Wi-Fi permite comunicação entre os dispositivos. Redes de convidados podem isolar os clientes. |
+| Abre no celular, mas um notebook falha | No notebook, execute `curl.exe --noproxy "*" --connect-timeout 5 http://192.168.1.10:5173/api/health`. Se funcionar, confira o uso de `http://` e as configurações do navegador ou proxy. Se der timeout, confira a interface escolhida por `Test-NetConnection`, o IP do notebook e os registros do firewall ativo. |
+| `EADDRINUSE` ou porta em uso | Encerre a execução anterior ou ajuste `WEB_PORT` para uma porta livre, por exemplo `5174`. Atualize a regra do firewall e a URL. Se a colisão for na API, ajuste `PORT`, mantendo `HOST=127.0.0.1`. Reinicie `npm.cmd run dev`. |
+| `EADDRNOTAVAIL` ou IPv4 mudou | Consulte novamente `ipconfig`, atualize `WEB_HOST`, a regra do firewall e a URL, e reinicie a aplicação. |
+| `/api/health` retorna 503 | No servidor, confira se o PostgreSQL está iniciado e se `PGHOST`, `PGPORT`, `PGUSER` e `PGPASSWORD` correspondem à instância. Execute `npm.cmd run setup`. |
+
+Ao terminar, pare o servidor com **Ctrl + C**, restaure `WEB_HOST=127.0.0.1` para o uso só no PC e desative a regra de teste no firewall ativo. No Firewall do Windows, use `Disable-NetFirewallRule -Name 'IFSwap-LAN'` no PowerShell como administrador. Para repetir o teste com os mesmos endereços, reative com `Enable-NetFirewallRule -Name 'IFSwap-LAN'`.
 
 ## Testes
 

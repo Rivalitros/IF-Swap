@@ -29,7 +29,7 @@ npm run build
 - Node.js 26.13.0 e npm 12.2.2. Instalação, dois testes unitários e build concluídos.
 - PostgreSQL 19 isolado em loopback na porta 55432. Dois setups, migrações 001 e 002, dois seeds e sete testes integrados aprovados.
 - PostgreSQL instalado na porta 5432. Setup e registro das migrações 001 e 002 verificados em `if_swap`. Sete testes integrados aprovados no banco separado `if_swap_test`.
-- A regressão do proxy usou duas sessões na mesma máquina para verificar REST e Socket.IO via Vite. A verificação em dois dispositivos físicos permanece aberta. [Roteiro LAN](como-rodar-localmente.md#teste-em-dois-dispositivos).
+- A regressão do proxy usou duas sessões na mesma máquina para verificar REST e Socket.IO via Vite. Em rede local, o usuário confirmou que a interface abriu no celular e relatou timeout em um notebook. Chat, reconexão, agenda e verificação do isolamento das portas ainda aguardam o roteiro entre dispositivos físicos. [Roteiro LAN](como-rodar-localmente.md#teste-em-dois-dispositivos).
 
 ## Login e conversas recentes
 
