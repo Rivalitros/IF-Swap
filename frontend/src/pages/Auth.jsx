@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { api } from '../api.js';
 import { AffiliationField, Brand, Feedback, Field, useAction } from '../components.jsx';
@@ -5,8 +7,10 @@ import { AffiliationField, Brand, Feedback, Field, useAction } from '../componen
 export function Auth({ mode, onUser }) {
   const navigate = useNavigate();
   const action = useAction();
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const register = mode === 'register';
   const recover = mode === 'recover';
+  const passwordAction = passwordVisible ? 'Ocultar senha' : 'Mostrar senha';
   async function submit(event) {
     event.preventDefault();
     const body = Object.fromEntries(new FormData(event.currentTarget));
@@ -31,8 +35,15 @@ export function Auth({ mode, onUser }) {
           <form className="form-stack" onSubmit={submit}>
             {register && <Field label="Nome" name="name" placeholder="Seu nome completo" autoComplete="name" required minLength={2} maxLength={100} />}
             <Field label="E-mail" name="email" type="email" placeholder="seu@email.com" autoComplete="email" required />
-            <Field label="Senha" name="password" type="password" placeholder={register ? 'Crie uma senha' : 'Digite sua senha'}
-              autoComplete={register ? 'new-password' : 'current-password'} required minLength={8} maxLength={128} />
+            <Field label="Senha">{id => <div className={register ? undefined : 'password-input'}>
+              <input id={id} name="password" type={passwordVisible ? 'text' : 'password'}
+                placeholder={register ? 'Crie uma senha' : 'Digite sua senha'}
+                autoComplete={register ? 'new-password' : 'current-password'} required minLength={8} maxLength={128} />
+              {!register && <button type="button" className="icon-button password-toggle" aria-controls={id}
+                aria-label={passwordAction} title={passwordAction} onClick={() => setPasswordVisible(visible => !visible)}>
+                {passwordVisible ? <EyeOff size={18} aria-hidden="true" /> : <Eye size={18} aria-hidden="true" />}
+              </button>}
+            </div>}</Field>
             {register && <>
               <Field label="Confirmar senha" name="confirmation" type="password" placeholder="Repita a senha" autoComplete="new-password" required minLength={8} maxLength={128} />
               <Field label="Curso ou setor" name="department" placeholder="Seu curso ou setor" required minLength={2} maxLength={100} />

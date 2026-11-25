@@ -18,6 +18,8 @@ A suíte cobre conta, perfil, matching, chat entre sessões, agenda com disputa 
 
 Na retomada no Windows, a instalação, o build, dois testes unitários e sete integrados passaram. Dois setups e dois seeds foram executados em PostgreSQL isolado em loopback na porta 55432. A instância local na porta 5432 também foi configurada. O setup de `if_swap` passou, as migrações 001 e 002 foram conferidas e os sete testes integrados passaram em `if_swap_test`. [Testes](../testes.md).
 
+O login ganhou um botão para mostrar e ocultar a senha. Em **Conversas → Recentes**, prévias longas exibem reticências dentro do cartão. Os ajustes e o cadastro foram validados no Edge com dados fictícios. [Testes](../testes.md#login-e-conversas-recentes).
+
 O envio ao GitHub transfere código e documentação. Para dados de usuários, use [backup privado](../banco-de-dados.md#backup-e-restauração-privados). Visibilidade do remoto depende de consulta autenticada ao GitHub. A validação local usou dois contextos no mesmo navegador, e o teste entre dispositivos físicos permanece aberto.
 
 A próxima etapa de **IF-10** é executar o roteiro em dois dispositivos físicos. Nesta máquina a instância 5432 escutava em todas as interfaces. Confirme o isolamento da porta antes de habilitar o modo LAN. [Próximos passos](NEXT_STEPS.md) · [Roteiro LAN](../como-rodar-localmente.md#teste-em-dois-dispositivos).

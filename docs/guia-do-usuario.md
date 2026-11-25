@@ -2,6 +2,8 @@
 
 ## Entrar e configurar o perfil
 
+Na tela **Entrar**, use o ícone de olho para mostrar ou ocultar a senha digitada.
+
 1. Em **Criar conta**, informe nome, e-mail, senha, curso ou setor e vínculo escolar.
 2. Adicione uma foto ou mantenha as iniciais. Revise o nome e o setor.
 3. Adicione em **Eu ensino** as habilidades que pode compartilhar, até cinco. Use o botão de remover para corrigir uma escolha.
@@ -10,7 +12,7 @@
 
 ## Encontrar uma troca e conversar
 
-Em **Sugestões**, use a busca por nome, setor ou habilidade. As tags preenchidas mostram o que o par ensina e as contornadas mostram o que quer aprender. Trocas em um sentido têm um aviso próprio. Abra **Ver perfil** para consultar habilidades e avaliações, ou **Iniciar conversa** para enviar uma mensagem. Volte pelo item **Conversas** para consultar as recentes. Mensagens novas aparecem com contagem de não lidas. Em caso de desconexão, volte à conversa para recuperar o histórico.
+Em **Sugestões**, use a busca por nome, setor ou habilidade. As tags preenchidas mostram o que o par ensina e as contornadas mostram o que quer aprender. Trocas em um sentido têm um aviso próprio. Abra **Ver perfil** para consultar habilidades e avaliações, ou **Iniciar conversa** para enviar uma mensagem. Em **Conversas → Recentes**, a prévia da última mensagem pode terminar com reticências. Abra a conversa para ler a mensagem completa. Mensagens novas aparecem com contagem de não lidas. Em caso de desconexão, volte à conversa para recuperar o histórico.
 
 ## Agendar e avaliar
 

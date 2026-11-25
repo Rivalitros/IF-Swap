@@ -106,7 +106,7 @@ input[type=checkbox] { accent-color: var(--green); width: 1.05rem; height: 1.05r
 
 .warning { color: #714b15; background: var(--warning-bg); }
 .chat-grid { display: grid; grid-template-columns: minmax(200px,.65fr) minmax(0,1.5fr); gap: 1rem; align-items: start; }
-.conversation-list { display: grid; gap: .55rem; }
+.conversation-list { display: grid; grid-template-columns: minmax(0,1fr); gap: .55rem; }
 .conversation-list h2,.thread-head h2 { font-size: 1.2rem; }
 .conversation { display: flex; align-items: center; gap: .65rem; color: inherit; text-decoration: none; border-radius: 10px; padding: .6rem; }
 .conversation.active,.conversation:hover { background: var(--light); }
@@ -159,7 +159,7 @@ input[type=checkbox] { accent-color: var(--green); width: 1.05rem; height: 1.05r
   .schedule-fields { grid-template-columns: 1fr; }
 }
 @media (max-width: 700px) {
-  .chat-grid { grid-template-columns: 1fr; }
+  .chat-grid { grid-template-columns: minmax(0,1fr); }
   .conversation-list { max-height: 220px; overflow: auto; }
   .chat-compose button { min-width: 42px; }
 }
@@ -195,6 +195,11 @@ input[type=checkbox] { accent-color: var(--green); width: 1.05rem; height: 1.05r
 .field { font-size: .875rem; font-weight: 650; }
 .field :is(input, select, textarea) { border-radius: 12px; min-height: 47px; }
 .field :is(input,textarea)::placeholder { color: var(--muted); opacity: .85; }
+.password-input { position: relative; }
+.password-input input { padding-inline-end: 3.25rem; }
+.password-input input::-ms-reveal { display: none; }
+.password-toggle { position: absolute; inset-inline-end: .2rem; inset-block-start: 50%; transform: translateY(-50%); width: 42px; height: 42px; color: var(--green); }
+.password-toggle:hover { background: var(--light); }
 .primary,.subtle,.example-tags button { border-radius: 999px; padding-inline: 1.5rem; }
 .auth-form .primary,.setup-actions .primary { min-height: 47px; }
 .auth-switch { text-align: center; font-size: .875rem; color: var(--muted); }

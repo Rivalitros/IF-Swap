@@ -31,6 +31,12 @@ npm run build
 - PostgreSQL instalado na porta 5432. Setup e registro das migrações 001 e 002 verificados em `if_swap`. Sete testes integrados aprovados no banco separado `if_swap_test`.
 - A regressão do proxy usou duas sessões na mesma máquina para verificar REST e Socket.IO via Vite. A verificação em dois dispositivos físicos permanece aberta. [Roteiro LAN](como-rodar-localmente.md#teste-em-dois-dispositivos).
 
+## Login e conversas recentes
+
+- No Edge, a senha iniciou mascarada. O botão alternou a visibilidade por clique e teclado, preservou o texto digitado e permitiu concluir o login. O cadastro pela interface também foi verificado com conta fictícia no banco de testes.
+- Uma mensagem de 2.000 caracteres sem espaços foi enviada via Socket.IO. Em 320, 390, 701 e 1.440 pixels, a prévia exibiu reticências e manteve o contador de não lidas dentro do cartão. O texto completo foi conferido ao abrir a conversa.
+- Dois testes unitários, sete integrados e build concluídos.
+
 ## Verificações da fase 1
 
 - Dois testes unitários e seis integrados executados com sucesso. Usado PostgreSQL local isolado com dados fictícios.
