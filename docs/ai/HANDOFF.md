@@ -16,7 +16,7 @@ O [guia de instalação no Windows](../como-rodar-localmente.md) é o ponto de e
 
 A suíte cobre conta, perfil, matching, chat entre sessões, agenda com disputa de horário, avaliação, mural e migração de chaves do seed. Testes no Edge passaram em desktop e mobile. Durante a validação, a parada intencional do PostgreSQL isolado causou 503 com a mensagem esperada. O mesmo processo Node voltou a responder 200 após a volta do banco.
 
-Na retomada no Windows, a instalação, o build, dois testes unitários e sete integrados passaram. Dois setups e dois seeds foram executados em PostgreSQL isolado em loopback na porta 55432. O `.env` local está preparado para a instância de 5432, com a senha de `postgres` pendente. Depois de configurar a senha localmente, execute o setup nessa instância e prepare o banco `if_swap_test`. [Testes](../testes.md).
+Na retomada no Windows, a instalação, o build, dois testes unitários e sete integrados passaram. Dois setups e dois seeds foram executados em PostgreSQL isolado em loopback na porta 55432. A instância local na porta 5432 também foi configurada. O setup de `if_swap` passou, as migrações 001 e 002 foram conferidas e os sete testes integrados passaram em `if_swap_test`. [Testes](../testes.md).
 
 O envio ao GitHub transfere código e documentação. Para dados de usuários, use [backup privado](../banco-de-dados.md#backup-e-restauração-privados). Visibilidade do remoto depende de consulta autenticada ao GitHub. A validação local usou dois contextos no mesmo navegador, e o teste entre dispositivos físicos permanece aberto.
 

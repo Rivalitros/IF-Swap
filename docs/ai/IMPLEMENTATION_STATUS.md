@@ -7,7 +7,7 @@ O [guia de instalação no Windows](../como-rodar-localmente.md) cobre a primeir
 | Área | Frontend | Backend e banco | Verificação e critério |
 |---|---|---|---|
 | Referências acadêmicas | TESTADO · 13 páginas Figma confrontadas com o React | TESTADO · DER, modelo, formulários, Canvas e divergências documentados | [Revisão](../revisao-academica.md). Originais identificáveis preservados localmente. |
-| Setup | TESTADO · Vite e build no Windows | TESTADO · `/api/health`, migrações 001/002, seed separado | Setup e seed repetidos em instância isolada. Senha pendente na instância local de 5432. |
+| Setup | TESTADO · Vite e build no Windows | TESTADO · `/api/health`, migrações 001/002, seed separado | Setup verificado na instância local de 5432 e suíte integrada aprovada. Seed repetido em instância isolada. |
 | Conta, perfil e habilidades | TESTADO · login, cadastro, três etapas e perfis | TESTADO · `/api/auth`, `/api/profile` e fotos em disco. `users`, `sessions`, `skills`, `user_skills` | Duas larguras na UI. API cobre senha, foto, vínculo, privacidade e limite concorrente de habilidades. Recuperação demonstrativa. |
 | Matching | TESTADO · busca, cartões e iniciar conversa | TESTADO · `/api/suggestions`, `/api/users/:id`, `/api/matches`. `matches` e `match_participants` | Ordenação recíproca, par único, visibilidade e normalização. |
 | Chat | TESTADO · duas sessões e aviso, chat/recibos | TESTADO · Socket.IO e `/api/matches/:id/messages`. `messages` | Acesso, presença, digitação, idempotência, persistência, logout e reinício. A regressão pelo proxy Vite passou. LAN em dois dispositivos segue como refinamento. |

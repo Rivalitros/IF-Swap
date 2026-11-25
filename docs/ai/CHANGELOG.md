@@ -4,6 +4,8 @@
 
 ## 2026-11-24
 
+- Setup concluído na instância PostgreSQL de 5432. Migrações 001 e 002 conferidas em `if_swap` e sete testes integrados aprovados em `if_swap_test`.
+
 - Retomada no Windows a partir de `af22dd3`. Teste integrado de sessão, WebSocket, histórico após reconexão e agenda pelo Vite. Dois testes unitários, sete integrados e build aprovados. Migrações e seed validados em instância isolada. Roteiro da LAN e pendências da instância 5432 registrados.
 
 - Finalização da fase local. Aviso de mensagens fora da conversa, encerramento de sockets ao revogar sessão e documentação de operação, recuperação e backup. Testes no Edge, suíte PostgreSQL e build. API verificada durante parada e recuperação do banco.
