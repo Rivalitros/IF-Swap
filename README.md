@@ -4,6 +4,8 @@ O IF Swap é a plataforma de troca de habilidades do grupo 3 do Projeto Integrad
 
 O projeto atende estudantes, docentes e funcionários. Seus objetivos são facilitar a descoberta de habilidades, conectar perfis complementares, organizar encontros presenciais ou online, construir reputação por avaliação mútua e permitir pedidos de ajuda com prazo.
 
+O grupo desenvolveu o IF Swap com o auxílio de agentes de inteligência artificial (IA).
+
 ## O que você pode fazer
 
 - Criar uma conta, configurar o perfil em três etapas e escolher até cinco habilidades que ensina e cinco que quer aprender.

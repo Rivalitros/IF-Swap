@@ -25,3 +25,5 @@ As estrelas das sugestões e do perfil abrem o formulário de avaliação. O per
 O envio ao GitHub transfere código e documentação. Para dados de usuários, use [backup privado](../banco-de-dados.md#backup-e-restauração-privados). Visibilidade do remoto depende de consulta autenticada ao GitHub.
 
 O usuário confirmou a conclusão da **IF-10** em dois dispositivos físicos. A próxima tarefa de refinamento é **IF-11**, que cobre acessibilidade e uso escolar. [Resultado da IF-10](../testes.md#validação-da-rede-local) · [Próximos passos](NEXT_STEPS.md).
+
+A apresentação do projeto no README registra o auxílio de agentes de IA no desenvolvimento.

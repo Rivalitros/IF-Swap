@@ -1,8 +1,12 @@
 # Changelog
 
-- Publicado o guia de instalação e execução do IF Swap no Windows, com configuração do PostgreSQL, contas demonstrativas e solução de problemas.
+## 2026-11-26
+
+- Registrado na apresentação do README que o grupo desenvolveu o IF Swap com o auxílio de agentes de IA.
 
 ## 2026-11-24
+
+- Publicado o guia de instalação e execução do IF Swap no Windows, com configuração do PostgreSQL, contas demonstrativas e solução de problemas.
 
 - Avaliação acessível pelas estrelas nas sugestões e no perfil. Perfil e Agenda usam estrelas clicáveis e comentário opcional para encontros concluídos.
 
